@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708114707) do
+ActiveRecord::Schema.define(:version => 20110708202046) do
 
   create_table "arguments", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(:version => 20110708114707) do
     t.datetime "updated_at"
     t.string   "place_holder"
     t.string   "sub_title"
+  end
+
+  create_table "delivers", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "estimate_id"
+    t.boolean  "is_delivered"
+    t.text     "feedback"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "departments", :force => true do |t|

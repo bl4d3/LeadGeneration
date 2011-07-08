@@ -1,4 +1,6 @@
 LeadGeneration::Application.routes.draw do
+  resources :delivers
+
   resources :questions do
     get :frontend_question, :controller => :frontends, :on => :member
   end

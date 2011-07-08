@@ -28,6 +28,8 @@ rails g scaffold Contacts name:string lastname:string email:string
 
 rails g scaffold Questions title:string body:text email:string category_id:integer
 
+rails g  scaffold Deliver company_id:integer estimate_id:integer is_delivered:boolean feedback:text
+
 ---------
 rails g web_app_theme:theme companies --theme="drastic-dark" --engine=haml --app-name="Lead Generation"
 rails g web_app_theme:themed companies --engine=haml --theme="drastic-dark"
