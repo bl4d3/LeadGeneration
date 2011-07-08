@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  company_id: 1
+  estimate_id: 
+  is_delivered: false
+  feedback: MyText
+
+two:
+  company_id: 1
+  estimate_id: 
+  is_delivered: false
+  feedback: MyText
