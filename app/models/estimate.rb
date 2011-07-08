@@ -7,6 +7,9 @@ class Estimate < ActiveRecord::Base
 	
 	has_many :needs
   has_many :categories, :through => :needs
+  
+  has_many :delivers
+  has_many :companies, :through => :delivers
 	
 	def city_name
     self.city.name unless city.blank?

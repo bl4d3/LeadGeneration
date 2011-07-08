@@ -17,6 +17,9 @@ class Company < ActiveRecord::Base
 	has_many :services
   has_many :categories, :through => :services
   
+  has_many :delivers
+  has_many :estimates, :through => :delivers
+  
   def city_name
     self.city.name unless city.blank?
   end
