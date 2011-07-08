@@ -1,0 +1,7 @@
+.row
+  %b!= container.name
+  = container.created_at
+  .links
+    = sexy_link_to "", "show", "", container_path(container)
+    \#{sexy_link_to "", "edit", "", edit_container_path(container)} |
+    \#{sexy_link_to "", "destroy", "", container_path(container), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}

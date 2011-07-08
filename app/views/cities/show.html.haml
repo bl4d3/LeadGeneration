@@ -1,0 +1,27 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", cities_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_city_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", city_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.city.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @city.name
+      %p
+        %b
+          = t("activerecord.attributes.city.department_id", :default => t("activerecord.labels.department_id", :default => "Department"))
+          \:
+        = @city.department.name
+      %p
+        %b
+          = t("activerecord.attributes.city.zip", :default => t("activerecord.labels.zip", :default => "Zip"))
+          \:
+        = @city.zip
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_city_path(@city), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), city_path(@city), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

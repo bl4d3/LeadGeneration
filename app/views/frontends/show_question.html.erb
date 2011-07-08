@@ -1,0 +1,159 @@
+<%= fix_text(@container.description) %>
+
+<h1><%= @question.title %></h1>
+<div class="question_show">
+	<div class="left">
+		<% unless @question.user.blank? %>
+			<div class="avatar">
+				<%= image_tag @question.user.photo.gsub("large", "square") unless @question.user.photo.blank? %>
+			</div>
+				<% if @question.user.role?(:guest) %>
+				<div class="user_detail">
+					<% if @question.user.url.blank? %>
+						<%= @question.user.displayName unless @question.user.displayName.blank? %>
+					<% else %>
+						<%= link_to @question.user.displayName, @question.user.url  unless @question.user.displayName.blank? %>
+					<% end %>
+					<% unless @question.user.providerName.blank? %>
+						<div>Attraverso <%= provider_icon(@question.user.providerName)  %></div>
+					<% end %>
+				</div>
+				<% else %>
+					<div class="is_company">
+						<%= @question.user.companies.size>1 ? "Aziende" : "Azienda" %>
+					</div>
+					<ul>
+					<% @question.user.companies.each do |company| %>
+						<li><%= link_to truncate(company.name,:length=>60),  frontend_company_company_path(company), :target => "_blank" %></li>
+					<% end %>
+					</ul>
+				<% end %>
+			<% end %>
+	</div>
+	<div class="right">
+		<p><%= @question.body %></p>
+		<div class="info">
+			<%= difference_date(@question.created_at) %>
+			
+				<% unless @question.category.blank? %>
+					in
+					<%= @question.category.title %>
+				<% end %>
+		</div>
+	</div>
+	<div class="clearF"></div>
+</div>
+
+
+<% if @question.comments.blank? %>
+	<p>Nessun commento</p>
+<% else %>
+
+<h1>  <%=  @question.comments.size %> <%= @question.comments.size==1 ? "commento" : "commenti"%></h1>
+
+<% @question.comments.each do |comment| %>
+
+	<div class="box_question">
+		
+		
+		<div class="question" style="width:97%">
+			<div class="comment">
+				<p><%= comment.comment %>
+				</p>
+			</div>
+			<div class="info">
+				<div class="left">
+					<% unless comment.user.blank? %>
+						<div class="avatar">
+							<%= image_tag comment.user.photo.gsub("large", "square") unless comment.user.photo.blank? %>
+						</div>
+						<% if @question.user.role?(:guest) %>
+						<div class="user_detail">
+							<% if comment.user.url.blank? %>
+								<%= comment.user.displayName unless comment.user.displayName.blank? %>
+							<% else %>
+								<%= link_to comment.user.displayName, comment.user.url  unless comment.user.displayName.blank? %>
+							<% end %>
+							<% unless comment.user.providerName.blank? %>
+								<div>Attraverso <%= provider_icon(comment.user.providerName)  %></div>
+							<% end %>
+						</div>
+						<% else %>
+						<div class="is_company" style="margin-left:0px">
+							<%= @question.user.companies.size>1 ? "Aziende" : "Azienda" %>
+						</div>
+						<ul>
+						<% @question.user.companies.each do |company| %>
+							<li><%= link_to truncate(company.name,:length=>60),  frontend_company_company_path(company), :target => "_blank" %></li>
+						<% end %>
+						</ul>
+						<% end %>
+						<div class="clearF"></div>
+					<% end %>
+				</div>
+				<div class="right">
+					<div class="category">
+					<%= difference_date(comment.created_at) %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearF"></div>
+	</div>
+<% end %>
+<% end %>
+
+<% if can? :create, Question %>
+	<%= form_for @comment, :url => create_reply_frontends_path, :html => { :class => :form } do |f| %>
+
+		<%= hidden_field_tag "comment[user_id]", current_user.id %>
+		<%= hidden_field_tag "id", @question.id %>
+		<h1>Risposta</h1>
+		
+		<%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @comment} %>
+		
+		<div class="box-form">
+				<div class="su-form reply">
+						<div class="info_user">
+							<h3>Rispondi</h3>
+							<div class="avatar">
+								<%= image_tag current_user.photo.gsub("large", "square") unless current_user.photo.blank? %>
+							</div>
+
+							<div class="user_detail">
+								<% if current_user.url.blank? %>
+									<%= current_user.displayName unless current_user.displayName.blank? %>
+								<% else %>
+									<%= link_to current_user.displayName, current_user.url  unless current_user.displayName.blank? %>
+								<% end %>
+								<% unless current_user.providerName.blank? %>
+									<div>Attraverso <%= provider_icon(current_user.providerName)  %></div>
+								<% end %>
+							</div>
+						</div>
+						<div class="question_reply">
+								<h1><%= @question.title %></h1>
+								<p><%=  @question.body %>
+								</p>
+		       	</div>
+						<div class="clearF"></div>
+						
+						<ol>
+							<li class="nest_item">
+				       	<span class="item">
+									<%= f.label :comment %>
+									<%= f.text_area :comment, :class => :text %>
+								</span>
+								<small>Dai maggiori informazioni entrando nel dettaglio della tua domanda</small>
+								<div class="clearF"></div>
+							</li>
+						</ol>
+						<div class="su-form-button">
+							<%= f.submit "Rispondi" %>
+						</div>
+			</div>
+		</div>
+	<% end %>
+<% else %>
+	<%= render :partial => "layouts/frontends/shared/janrain", :locals => {:msg => "Accedi e rispondi alla domanda!"} %>
+<% end %>

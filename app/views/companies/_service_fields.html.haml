@@ -1,0 +1,7 @@
+.category.nested_el
+  %h3 Service
+  .group
+    = f.label :category_id, t("activerecord.attributes.service.category_id", :default => "Category"), :class => :label
+    = f.collection_select :category_id, Category.all, :id, :title
+    %span.description Ex: a simple text
+  = link_to_remove_fields "remove", f

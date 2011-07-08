@@ -1,0 +1,34 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", places_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_place_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Places
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.place.name", :default => t("activerecord.labels.name", :default => "Name"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @places.each do |place|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = place.name
+            %td
+              = link_to place.name, place_path(place)
+            %td
+              = place.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", place_path(place)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_place_path(place)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", place_path(place), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+        = paginate @places
+- content_for :sidebar, render(:partial => 'sidebar')

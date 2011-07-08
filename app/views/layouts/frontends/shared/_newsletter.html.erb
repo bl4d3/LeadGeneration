@@ -1,0 +1,54 @@
+<div class="newsletter">
+	<h1>Iscriviti alle newsletter!</h1>
+	<%= form_for @contact, :url => create_contact_frontends_path, :html => { :class => :form }, :remote => true do |f| %>
+
+	<% if @contact.errors.any? %>  
+	<div id="errorExplanation_frontend">  
+	  	<h2>
+			<%= @contact.errors.size==1 ? "#{@contact.errors.count} errore" : "#{@contact.errors.count} errori" %>
+		</h2>  
+	</div>  
+	<% end %>
+
+	<div class="box-form-small">
+			<div class="su-form-small">
+	       	<ol>
+				<li class="nest_item">
+	                <span class="item">
+	                    <%= f.label :name %>
+						<%= f.text_field :name, :class => :text %>
+	                </span>
+	                <div class="clearF"></div>
+	            </li>
+				<li class="nest_item">
+	                <span class="item">
+	                    <%= f.label :lastname %>
+						<%= f.text_field :lastname, :class => :text %>
+	                </span>
+	                <div class="clearF"></div>
+	            </li>
+				<li class="nest_item">
+	                <span class="item">
+	                    <%= f.label :email %>
+						<%= f.text_field :email, :class => :text %>
+	                </span>
+					<div class="mandatory">Obbligatorio</div>
+	                <div class="clearF"></div>
+	            </li>
+				<li class="nest_item">
+	                <span class="item">
+	                    <%= f.label :privacy %>
+						<%= f.check_box :privacy %>
+	                </span>
+					<div class="mandatory">Obbligatorio</div>
+	                <div class="clearF"></div>
+	            </li>
+			</ol>
+		</div>
+		<div class="su-form-small-button">
+			<%= f.submit "Iscriviti" %>
+		</div>
+	</div>
+
+	<% end %>
+</div>

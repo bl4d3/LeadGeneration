@@ -1,0 +1,128 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", companies_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_company_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", company_path
+  .content
+    .inner
+      - if current_user.role?(:admin) 
+        %p
+          %b
+            = t("activerecord.attributes.company.latitude", :default => t("activerecord.labels.latitude", :default => "Latitude"))
+            \:
+          = @company.latitude
+        %p
+          %b
+            = t("activerecord.attributes.company.longitude", :default => t("activerecord.labels.longitude", :default => "Longitude"))
+            \:
+          = @company.longitude
+        %p
+          %b
+            = t("activerecord.attributes.company.altitude", :default => t("activerecord.labels.altitude", :default => "Altitude"))
+            \:
+          = @company.altitude
+      %p
+        %b
+          = t("activerecord.attributes.company.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @company.name
+      %p
+        %b
+          = t("activerecord.attributes.company.description", :default => t("activerecord.labels.description", :default => "Description"))
+          \:
+        = @company.description.html_safe
+      %p
+        %b
+          = t("activerecord.attributes.company.department_id", :default => t("activerecord.labels.department_id", :default => "Department id"))
+          \:
+        = @company.city.department.name      
+      %p
+        %b
+          = t("activerecord.attributes.company.city_id", :default => t("activerecord.labels.city_id", :default => "City id"))
+          \:
+        = @company.city.name        
+      %p
+        %b
+          = t("activerecord.attributes.company.address", :default => t("activerecord.labels.address", :default => "Address"))
+          \:
+        = @company.address                
+      %p
+        %b
+          = t("activerecord.attributes.company.piva", :default => t("activerecord.labels.piva", :default => "Piva"))
+          \:
+        = @company.piva
+      %p
+        %b
+          = t("activerecord.attributes.company.url_site", :default => t("activerecord.labels.url_site", :default => "Url site"))
+          \:
+        = @company.url_site
+      %p
+        %b
+          = t("activerecord.attributes.company.email_address", :default => t("activerecord.labels.email_address", :default => "Email address"))
+          \:
+        = @company.email_address
+      %p
+        %b
+          = t("activerecord.attributes.company.phone", :default => t("activerecord.labels.phone", :default => "Phone"))
+          \:
+        = @company.phone
+      %p
+        %b
+          = t("activerecord.attributes.company.fax", :default => t("activerecord.labels.fax", :default => "Fax"))
+          \:
+        = @company.fax
+      %p
+        %b
+          = t("activerecord.attributes.company.timetable", :default => t("activerecord.labels.timetable", :default => "Timetable"))
+          \:
+        = @company.timetable
+      %p
+        %b
+          = t("activerecord.attributes.company.facebook", :default => t("activerecord.labels.facebook", :default => "Facebook"))
+          \:
+        = @company.facebook
+      %p
+        %b
+          = t("activerecord.attributes.company.twitter", :default => t("activerecord.labels.twitter", :default => "Twitter"))
+          \:
+        = @company.twitter
+      %p
+        %b
+          = t("activerecord.attributes.company.youtube", :default => t("activerecord.labels.youtube", :default => "Youtube"))
+          \:
+        = @company.youtube
+      - if current_user.role?(:admin) 
+        %p
+          %b
+            = t("activerecord.attributes.company.tokens", :default => t("activerecord.labels.tokens", :default => "Tokens"))
+            \:
+          = @company.tokens
+        %p
+          %b
+            = t("activerecord.attributes.company.is_exclusive", :default => t("activerecord.labels.is_exclusive", :default => "Is exclusive"))
+            \:
+          = @company.is_exclusive
+      - if current_user.role?(:admin) 
+        %p
+          %b
+            = t("activerecord.attributes.company.user_id", :default => t("activerecord.labels.user_id", :default => "User"))
+            \:
+          = @company.user_id
+      %p
+        %b
+          Zone di competenza
+          \:
+        - @company.departments.each do |department|
+          = department.name
+      %p
+        %b
+          Categorie
+          \:
+        - @company.categories.each do |category|
+          = category.title
+	      
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_company_path(@company), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), company_path(@company), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

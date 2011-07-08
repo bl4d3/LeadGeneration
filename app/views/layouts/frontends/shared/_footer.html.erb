@@ -1,0 +1,27 @@
+<div class="footer">
+	<div class="items">
+		<div class="item">
+			<div class="text">
+				<h3>Aziende preventivi matrimonio</h3>
+				<%= categories_first_level("").html_safe %>
+			</div>
+		</div>
+		<div class="item borded_white">
+			<h3>Ultime domande inserite</h3>
+			<%= last_questions(QUESTIONS_IN_FOOTER).html_safe %>
+		</div>
+		<div class="item">
+			<%= footer_nav("footer_nav").html_safe %>
+		</div>
+	</div>
+	<div class="clearF"></div>
+</div><!-- end footer -->
+
+<div class="end_footer">
+	<p class="left">
+  &copy; Copyright <%= DateTime.now.year %>  <%= link_to "MatrimonioIdee.it", root_path %> il portale dei preventivi gratuiti per il tuo matrimonio online.
+	</p>
+	<p class="right">
+	Progetto realizzato da <%= link_to "NerdyDog Web Agency", "http://www.nerdydog.it"%>
+	</p>
+</div>

@@ -1,0 +1,187 @@
+<%= form_for @company, :url => create_company_frontends_path, :html => { :class => :form } do |f| %>
+
+<%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @company} %>
+
+<%= fix_text(@container.description) %>
+<div class="box-form">
+		<div class="su-form">
+       	<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :name %>
+					<%= f.text_field :name, :class => :text %>
+                    
+                </span>
+                <small>Nome o ragione sociale della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :piva %>
+					<%= f.text_field :piva, :class => :text %>
+                    
+                </span>
+                <small>P.IVA della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :description %>
+					<%= f.text_area :description, :class=>:text %>
+                    
+                </span>
+                <small>Breve descrizione del tuo core business e dei punti di forza della tua azienda</small>
+                <div class="clearF"></div>
+           	</li>
+		</ol>
+	</div>
+</div>
+
+<h1>Dati azienda</h1>
+<div class="box-form">
+	<div class="su-form">
+		<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :address %>
+					<%= f.text_field :address, :class => :text %>
+                    
+                </span>
+                <small>Indirizzo della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :city_id %>
+					<%= f.autocomplete_field :city_name, autocomplete_city_name_companies_path, :class => :text, :id_element => "#company_city_id" %>
+					<%= f.hidden_field :city_id %>
+                    
+                </span>
+                <small>Digita la citt&agrave; dove risiede la tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :url_site %>
+                    <span class="input_prefix">http://</span>
+					<%= f.text_field :url_site, :class => "text input_website" %>
+                    
+                </span>
+                <small>Indirizzo internet della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+
+     		<li class="nest_item">
+                <span class="item">
+                    <%= f.label :email_address %>
+					<%= f.text_field :email_address, :class => :text %>
+                    
+                </span>
+                <small>Indirizzo e-mail della tua azienda</small>
+<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :phone %>
+					<%= f.text_field :phone, :class => :text %>
+                    
+                </span>
+                <small>Contatto telefonico della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+		</ol>
+	</div>
+</div>
+
+<h1>Social footprint</h1>
+<div class="box-form">
+	<div class="su-form">
+		<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :facebook %>
+					<%= f.text_field :facebook, :class => :text %>
+                    
+                </span>
+                <small>Pagina facebook della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :twitter %>
+					<%= f.text_field :twitter, :class => :text %>
+                    
+                </span>
+                <small>Account twitter della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :youtube %>
+					<%= f.text_field :youtube, :class => :text %>
+                    
+                </span>
+                <small>Canale youtube della tua azienda</small>
+                <div class="clearF"></div>
+            </li>
+		</ol>
+	</div>
+</div>
+
+<h1>Area di competenza</h1>
+<div class="box-form">
+	<div class="su-form">
+		<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :department %>
+					<%= f.text_field :department_tokens, :class => :text,"data-pre" => @company.departments.map(&:attributes).to_json %>
+                </span>
+                <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
+                <div class="clearF"></div>
+            </li>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :category %>
+					<div class="select_categories">
+					<% for category in Category.all %>
+				    <div>
+				      <%= check_box_tag "company[category_ids][]", category.id, @company.categories.include?(category) %>
+				      <%= category.title %>
+					</div>
+					<% end %>
+					</div>
+                </span>
+                <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
+                <div class="clearF"></div>
+            </li>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :privacy %>
+					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:name => "Privacy").first) %>
+					
+                </span>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+        </ol>
+    </div>
+</div>	
+<div class="su-form-button">
+	<%= f.submit "Segnala azienda" %>
+</div>
+
+
+<% end %>

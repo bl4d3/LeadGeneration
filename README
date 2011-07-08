@@ -1,0 +1,33 @@
+rails g scaffold Company latitude:float longitude:float altitude:float name:string description:text piva:string url_site:string email_address:string phone:string fax:string timetable:string facebook:string twitter:string youtube:string tokens:integer is_exclusive:boolean user_id:integer
+
+rails g scaffold City name:string department_id:integer zip:string
+
+rails g scaffold Department name:string
+
+rails g scaffold Zone city_id:integer department_id:integer company_id:integer
+
+rails g scaffold Category title:string description:text parent_id:string
+
+rails g scaffold Services category_id:integer company_id:integer
+
+rails g scaffold Containers name:string description:text parent_id:integer is_public:integer order_show:integer template:string user_id:integer mkey:string mdescription:string mtitle:string slug:string
+
+rails g scaffold Places name:string alias:string
+
+rails g scaffold Positions continer_id:integer place_id:integer
+
+rails g scaffold Estimates name:string lastname:string address:string city_id:integer email:string phone:string
+
+rails g scaffold Needs category_id:integer estimate_id:integer
+
+rails g scaffold Arguments name:string alias:string slug:string
+
+rails g scaffold Posts title:string intro:text body:text mkey:text mdescription:text slug:string argument_id:integer user_id:integer is_public:boolean is_commentable:boolean
+
+rails g scaffold Contacts name:string lastname:string email:string
+
+rails g scaffold Questions title:string body:text email:string category_id:integer
+
+---------
+rails g web_app_theme:theme companies --theme="drastic-dark" --engine=haml --app-name="Lead Generation"
+rails g web_app_theme:themed companies --engine=haml --theme="drastic-dark"

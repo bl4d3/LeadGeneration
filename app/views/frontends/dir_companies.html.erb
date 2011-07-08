@@ -1,0 +1,49 @@
+<%= fix_text(@category.description) %>
+<h1>Aziende presenti</h1>
+<div class="companies">
+<% if @companies.size>0 %>
+	<% @companies.each do |company| %>
+		<div class="company">
+			<h3><%= link_to company.name,  frontend_company_company_path(company) %></h3>
+			<div class="address">
+				<%= "#{company.address},"  unless company.address.blank? %>
+				<%= company.city.name %>,
+				<%= company.city.department.name %>
+			</div>			
+			<p><%= truncate(company.description , :length => 150, :omission => "... #{link_to "maggiori info", frontend_company_company_path(company)}").html_safe %><p>
+			<div class="social">
+				<% unless company.url_site.blank? %>
+					<%= link_to image_tag("icon_set/24x24/site.png"), company.url_site %>
+				<% end %>
+				
+				<% unless company.email_address.blank? %>
+					<%= link_to image_tag("icon_set/24x24/E_Mail.png"), "#" %>
+				<% end %>
+				
+				<% unless company.phone.blank? %>
+					<%= image_tag("icon_set/24x24/Phone.png") %> <%= company.phone %>
+					
+				<% end %>
+				
+				<% unless company.facebook.blank? %>
+					<%= link_to image_tag("icon_set/24x24/facebook.png"), company.facebook %>
+				<% end %>
+				
+				<% unless company.twitter.blank? %>
+					<%= link_to image_tag("icon_set/24x24/Twitter.png"), company.twitter %>
+				<% end %>
+				
+				<% unless company.youtube.blank? %>
+					<%= link_to image_tag("icon_set/24x24/utube.png"), company.youtube %>
+				<% end %>
+			</div>
+		</div>
+	<% end  %>
+	<div class="frontend">
+		<%= paginate @companies %>
+	</div>
+<% else %>
+	<p>Nessuna azienda per questa categoria</p>
+<% end %>
+</div>
+

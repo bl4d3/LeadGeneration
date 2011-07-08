@@ -1,0 +1,39 @@
+<%= fix_text(@container.description) %>
+
+<% if @posts.size > 0 %>
+	<% @posts.all.each do |post| %>
+		<div class="post">
+			<h1><%= link_to post.title, blog_post_frontend_path(post) %></h1>
+			
+			<div class="info">
+				<%= difference_date(post.created_at,"m") %> in <%= link_to post.argument.name, blog_argument_frontend_path(post.argument) %>
+			</div>
+			
+			<div class="impression">
+				<span><%= post.hit.to_i %>
+				</span>
+				<p>Visite</p>
+			</div>
+			
+			<div class="comments">
+				<span><%= post.comments.size %>
+				</span>
+				<p>Commenti</p>
+			</div>			
+			
+			<div class="intro">
+				<%= post.intro.html_safe %>
+			</div>
+			<div class="more">
+				<%= link_to "...leggi", blog_post_frontend_path(post) %>
+			</div>
+		</div>
+		
+		
+		<div class="pagination">
+			<%= paginate @posts %>
+		</div>
+	<% end %>
+<% else %>
+	<p>Nessun articolo presente</p>
+<% end %>

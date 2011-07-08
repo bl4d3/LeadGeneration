@@ -1,0 +1,54 @@
+<% if can? :create, Question %>
+	<%= form_for @question, :url => create_question_frontends_path, :html => { :class => :form } do |f| %>
+
+	<%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @question} %>
+
+	<%= hidden_field_tag "question[user_id]", current_user.id %>
+	<%= fix_text(@container.description) %>
+	<div class="box-form">
+			<div class="su-form">
+	       	<ol>
+				<li class="nest_item">
+	                <span class="item">
+	                    <%= f.label :title %>
+											<%= f.text_field :title, :class => :text %>
+                    
+	                </span>
+	                <small>Inserisci qui in breve la tua domanda</small>
+					<div class="mandatory">Obbligatorio</div>
+	                <div class="clearF"></div>
+	            </li>
+
+				<li class="nest_item">
+	       	<span class="item">
+						<%= f.label :body %>
+						<%= f.text_area :body, :class => :text %>
+					</span>
+					<small>Dai maggiori informazioni entrando nel dettaglio della tua domanda</small>
+					<div class="clearF"></div>
+				</li>
+
+				<li class="nest_item">
+	       	<span class="item">
+						<%= f.label :category_id %>
+						<%= f.collection_select :category_id, Category.all, :id, :title, :class => :text %>
+					</span>
+					<small>Seleziona la categoria della tua domanda</small>
+					<div class="clearF"></div>
+				</li>
+
+			</ol>
+		</div>
+	</div>
+
+	<div class="su-form-button">
+		<%= f.submit "Invia domanda" %>
+	</div>
+
+	<% end %>
+	
+<% else %>
+	<%= render :partial => "layouts/frontends/shared/janrain", :locals => {:msg => "Accedi ed inserisci una nuova domanda!"} %>
+	
+<br />
+<% end %>

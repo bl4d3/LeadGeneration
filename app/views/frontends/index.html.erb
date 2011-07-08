@@ -1,0 +1,7 @@
+<%= fix_text(@container.description) %>
+
+<% if @container.place_holder == "arrange_wedding" %>
+        <div class="category_in_page">
+                <%= categories_first_level("strip").html_safe %>
+        </div>
+<% end %>

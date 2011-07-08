@@ -1,0 +1,26 @@
+<div class="box_center">
+	<div class="box_left">
+		<%= link_to image_tag("site/matrimonio_logo.jpg", :width=>350), root_path %>
+		
+	</div>
+	<div class="box_right">
+		<div class="link_social">
+			<a href="#"><img src="/images/site/social_32/facebook.png" /></a>
+			<a href="#"><img src="/images/site/social_32/twitter.png" /></a>
+			<%= link_to image_tag("site/social_32/rss.png"), "/blogfeed.xml" %>
+			
+		</div>
+		<%= link_to image_tag("site/login_azienda.jpg"), new_user_registration_path %>
+		
+		<div class="user_info">
+			<%= render :partial => "layouts/frontends/shared/user_nav" %>
+		</div>		
+	</div>
+	
+	<div class="clearF"></div>
+</div><!-- end box_center -->
+<hr />
+<div class="sub_nav">
+	<%= sub_nav("sub_nav").html_safe %>
+	<div class="clearF"></div>
+</div><!-- end sub nav -->

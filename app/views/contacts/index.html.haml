@@ -1,0 +1,34 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", contacts_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_contact_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Contacts
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.contact.email", :default => t("activerecord.labels.email", :default => "E-mail"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @contacts.each do |contact|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = contact.id
+            %td
+              = link_to contact.email, contact_path(contact)
+            %td
+              = contact.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", contact_path(contact)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contact_path(contact)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", contact_path(contact), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+        = paginate @contacts
+- content_for :sidebar, render(:partial => 'sidebar')

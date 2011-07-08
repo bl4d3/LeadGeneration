@@ -1,0 +1,17 @@
+.zones.nested_el
+  %h3 Zone
+  .group
+    = f.label :city_id, t("activerecord.attributes.zone.city_id", :default => "City"), :class => :label
+    = f.collection_select :city_id, City.all, :id, :name
+    = f.autocomplete_field :city_id, autocomplete_city_name_zones_path, :update_elements => {:id => '#city_id', :created_at => "#created_at"}
+    %span.description Ex: a simple text
+  .group
+    = f.label :department_id, t("activerecord.attributes.zone.department_id", :default => "Department"), :class => :label
+    = f.collection_select :department_id, Department.all, :id, :name
+    = f.autocomplete_field :department_id, autocomplete_department_name_zones_path, :update_elements => {:id => '#city_id', :created_at => "#created_at"}
+    %span.description Ex: a simple text
+  .group
+    = f.label :company_id, t("activerecord.attributes.zone.company_id", :default => "Company"), :class => :label
+    = f.collection_select :company_id, Company.all, :id, :name
+    %span.description Ex: a simple text
+  = link_to_remove_fields "remove", f

@@ -1,0 +1,69 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", posts_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_post_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", post_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.post.title", :default => t("activerecord.labels.title", :default => "Titolo"))
+          \:
+        = @post.title
+      %p
+        %b
+          = t("activerecord.attributes.post.cover_imege", :default => t("activerecord.labels.cover_imege", :default => "Immagine di copertina"))
+          \:
+        = @post.cover_imege
+      - if current_user.role?(:admin)
+        %p
+          %b
+            = t("activerecord.attributes.post.intro", :default => t("activerecord.labels.intro", :default => "Intro"))
+            \:
+          = @post.intro.html_safe unless @post.intro.blank?
+      %p
+        %b
+          = t("activerecord.attributes.post.body", :default => t("activerecord.labels.body", :default => "Post"))
+          \:
+        = @post.body.html_safe
+      - if current_user.role?(:admin)
+        %p
+          %b
+            = t("activerecord.attributes.post.mkey", :default => t("activerecord.labels.mkey", :default => "Mkey"))
+            \:
+          = @post.mkey
+        %p
+          %b
+            = t("activerecord.attributes.post.mdescription", :default => t("activerecord.labels.mdescription", :default => "Mdescription"))
+            \:
+          = @post.mdescription
+        %p
+          %b
+            = t("activerecord.attributes.post.slug", :default => t("activerecord.labels.slug", :default => "Slug"))
+            \:
+          = @post.slug
+        %p
+          %b
+            = t("activerecord.attributes.post.argument_id", :default => t("activerecord.labels.argument_id", :default => "Argument"))
+            \:
+          = @post.argument_id
+        %p
+          %b
+            = t("activerecord.attributes.post.user_id", :default => t("activerecord.labels.user_id", :default => "User"))
+            \:
+          = @post.user_id
+        %p
+          %b
+            = t("activerecord.attributes.post.is_public", :default => t("activerecord.labels.is_public", :default => "Is public"))
+            \:
+          = @post.is_public
+        %p
+          %b
+            = t("activerecord.attributes.post.is_commentable", :default => t("activerecord.labels.is_commentable", :default => "Is commentable"))
+            \:
+          = @post.is_commentable
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_post_path(@post), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), post_path(@post), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

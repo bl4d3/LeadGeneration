@@ -1,0 +1,54 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", estimates_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_estimate_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", estimate_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.estimate.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @estimate.name
+      %p
+        %b
+          = t("activerecord.attributes.estimate.lastname", :default => t("activerecord.labels.lastname", :default => "Lastname"))
+          \:
+        = @estimate.lastname
+      %p
+        %b
+          = t("activerecord.attributes.estimate.address", :default => t("activerecord.labels.address", :default => "Address"))
+          \:
+        = @estimate.address
+      %p
+        %b
+          = t("activerecord.attributes.estimate.city_id", :default => t("activerecord.labels.city_id", :default => "City"))
+          \:
+        = @estimate.city.name
+      %p
+        %b
+          = t("activerecord.attributes.estimate.email", :default => t("activerecord.labels.email", :default => "Email"))
+          \:
+        = @estimate.email  
+      %p
+        %b
+          = t("activerecord.attributes.estimate.phone", :default => t("activerecord.labels.phone", :default => "Phone"))
+          \:
+        = @estimate.phone
+      %p
+        %b
+          = t("activerecord.attributes.estimate.category_id", :default => t("activerecord.labels.category_id", :default => "Categorie"))
+          \:
+        - @estimate.categories.each_with_index do |category, index|
+          = "#{category.title}"
+          = ", " if index<@estimate.categories.size-1
+      %p
+        %b
+          = t("activerecord.attributes.estimate.note", :default => t("activerecord.labels.note", :default => "Note"))
+          \:
+        = @estimate.note
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_estimate_path(@estimate), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), estimate_path(@estimate), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

@@ -1,0 +1,54 @@
+<%= fix_text(@container.description) %>
+
+<% @questions.each do |question| %>
+	<div class="box_question">
+		<div class="impression">
+			<span>0</span>
+			<p>Visite</p>
+		</div>
+		
+		<div class="comments">
+			<span><%= question.comments.size %>
+			</span>
+			<p>Commenti</p>
+		</div>
+		
+		<div class="question">
+			<div class="title">
+				<h2><%= link_to question.title, frontend_question_question_path(question) %></h2>
+			</div>
+			<div class="info">
+				<div class="left">
+					<% unless question.user.blank? %>
+						<div class="avatar">
+							<%= image_tag question.user.photo.gsub("large", "square") unless question.user.photo.blank? %>
+						</div>
+						<div class="user_detail">
+							<% if question.user.url.blank? %>
+								<%= question.user.displayName unless question.user.displayName.blank? %>
+							<% else %>
+								<%= link_to question.user.displayName, question.user.url  unless question.user.displayName.blank? %>
+							<% end %>
+							<% unless question.user.providerName.blank? %>
+								<div>Attraverso <%= provider_icon(question.user.providerName)  %></div>
+							<% end %>
+						</div>
+						<div class="clearF"></div>
+					<% end %>
+				</div>
+				<div class="right">
+					<div class="category">
+					<%= difference_date(question.created_at) %>
+					
+						<% unless question.category.blank? %>
+							in
+							<%= question.category.title %>
+						<% end %>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearF"></div>
+	</div>
+<% end %>
+

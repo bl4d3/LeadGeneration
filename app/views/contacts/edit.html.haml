@@ -1,0 +1,14 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", contacts_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_contact_path
+      %li.active= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contact_path
+  .content
+    %h2.title
+      = t("web-app-theme.edit", :default => "Edit")
+      Contact
+    .inner
+      = form_for @contact, :url => contact_path(@contact), :html => { :class => :form } do |f|
+        = render :partial => "form", :locals => {:f => f}
+- content_for :sidebar, render(:partial => 'sidebar')

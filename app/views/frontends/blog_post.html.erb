@@ -1,0 +1,146 @@
+<h1><%= @post.title %></h1>
+<div class="post">
+	<div class="info">
+		<%= difference_date(@post.created_at,"") %> in <%= link_to @post.argument.name, blog_argument_frontend_path(@post.argument) %>
+	</div>
+	<div class="intro">
+		<%= @post.body.html_safe %>
+	</div>
+	<% if !@post.user.blank? && !@post.user.info.blank? %>
+		<div class="user_info">
+			<p class="info"><%= @post.user.info.html_safe %></p>
+			<div class="company">
+			<% if @post.user.role?(:company) %>
+				<div class="is_company">
+					<%= @post.user.companies.size>1 ? "Aziende" : "Azienda" %>
+				</div>
+				<ul>
+					<% @post.user.companies.each do |company| %>
+						<li><%= link_to truncate(company.name,:length=>60),  frontend_company_company_path(company), :target => "_blank" %></li>
+					<% end %>
+				</ul>
+			<% end %>
+			</div>
+			<div class="clearF"></div>
+		</div>
+	<% end %>
+</div>
+<%= social_network.html_safe %>
+
+
+
+<% if @post.comments.blank? %>
+	<p>Nessun commento</p>
+<% else %>
+
+<h1>  <%=  @post.comments.size %> <%= @post.comments.size==1 ? "commento" : "commenti"%></h1>
+
+<% @post.comments.each do |comment| %>
+
+	<div class="box_question">
+		
+		
+		<div class="question" style="width:97%">
+			<div class="comment">
+				<p><%= comment.comment %>
+				</p>
+			</div>
+			<div class="info">
+				<div class="left">
+					<% unless comment.user.blank? %>
+						<div class="avatar">
+							<%= image_tag comment.user.photo.gsub("large", "square") unless comment.user.photo.blank? %>
+						</div>
+						<% if comment.user.role?(:guest) %>
+						<div class="user_detail">
+							<% if comment.user.url.blank? %>
+								<%= comment.user.displayName unless comment.user.displayName.blank? %>
+							<% else %>
+								<%= link_to comment.user.displayName, comment.user.url  unless comment.user.displayName.blank? %>
+							<% end %>
+							<% unless comment.user.providerName.blank? %>
+								<div>Attraverso <%= provider_icon(comment.user.providerName)  %></div>
+							<% end %>
+						</div>
+						<% else %>
+						<div class="is_company" style="margin-left:0px">
+							<%= comment.user.companies.size>1 ? "Aziende" : "Azienda" %>
+						</div>
+						<ul>
+						<% comment.user.companies.each do |company| %>
+							<li><%= link_to truncate(company.name,:length=>60),  frontend_company_company_path(company), :target => "_blank" %></li>
+						<% end %>
+						</ul>
+						<% end %>
+						<div class="clearF"></div>
+					<% end %>
+				</div>
+				<div class="right">
+					<div class="category">
+					<%= difference_date(comment.created_at) %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearF"></div>
+	</div>
+<% end %>
+<% end %>
+
+<% if can? :create, Question %>
+	<%= form_for @comment, :url => create_blog_reply_frontends_path, :html => { :class => :form } do |f| %>
+
+		<%= hidden_field_tag "comment[user_id]", current_user.id %>
+		<%= hidden_field_tag "id", @post.id %>
+		<h1>Risposta</h1>
+		
+		<%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @comment} %>
+		
+		<div class="box-form">
+				<div class="su-form reply">
+						<div class="info_user">
+							<h3>Rispondi</h3>
+							<div class="avatar">
+								<%= image_tag current_user.photo.gsub("large", "square") unless current_user.photo.blank? %>
+							</div>
+
+							<div class="user_detail">
+								<% if current_user.url.blank? %>
+									<%= current_user.displayName unless current_user.displayName.blank? %>
+								<% else %>
+									<%= link_to current_user.displayName, current_user.url  unless current_user.displayName.blank? %>
+								<% end %>
+								<% unless current_user.providerName.blank? %>
+									<div>Attraverso <%= provider_icon(current_user.providerName)  %></div>
+								<% end %>
+							</div>
+						</div>
+						<div class="question_reply">
+								<h1><%= @post.title %></h1>
+								<p><%=  @post.intro.html_safe %>
+								</p>
+		       	</div>
+						<div class="clearF"></div>
+						
+						<ol>
+							<li class="nest_item">
+				       	<span class="item">
+									<%= f.label :comment %>
+									<%= f.text_area :comment, :class => :text %>
+								</span>
+								<small>Dai maggiori informazioni entrando nel dettaglio della tua domanda</small>
+								<div class="clearF"></div>
+							</li>
+						</ol>
+						<div class="su-form-button">
+							<%= f.submit "Rispondi" %>
+						</div>
+			</div>
+		</div>
+
+
+
+	<% end %>
+<% else %>
+	<%= render :partial => "layouts/frontends/shared/janrain", :locals => {:msg => "Accedi e commenta questo post!"} %>
+<% end %>

@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  latitude: 1.5
+  longitude: 1.5
+  altitude: 1.5
+  name: MyString
+  description: MyText
+  piva: MyString
+  url_site: MyString
+  email_address: MyString
+  phone: MyString
+  fax: MyString
+  timetable: MyString
+  facebook: MyString
+  twitter: MyString
+  youtube: MyString
+  tokens: 1
+  is_exclusive: false
+  user_id: 1
+
+two:
+  latitude: 1.5
+  longitude: 1.5
+  altitude: 1.5
+  name: MyString
+  description: MyText
+  piva: MyString
+  url_site: MyString
+  email_address: MyString
+  phone: MyString
+  fax: MyString
+  timetable: MyString
+  facebook: MyString
+  twitter: MyString
+  youtube: MyString
+  tokens: 1
+  is_exclusive: false
+  user_id: 1

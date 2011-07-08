@@ -1,0 +1,63 @@
+<h1>Registrati al portale di Matrimonio Idee</h1>
+
+<p>
+	Se sei un azienda e vuoi usufruire dei servizi che Matrimonio Idee propone diventa nostro partner, ti diamo la possibilit&agrave; di acquisire nuovi clienti per la tua azienda in automatico ricevendo richieste di preventivo e lavoro da utenti interessati della tua zona di azione.
+</p>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @user} %>
+	
+
+	<div class="box-form">
+		<div class="su-form">
+	     <ol>
+		
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :displayName %>
+						<%= f.text_field :displayName, :class => :text %>
+					</span>
+					<small>Inserisci il tuo nome utente</small>
+					<div class="mandatory">Obbligatorio</div>
+					<div class="clearF"></div>
+				</li>		
+
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :email %>
+						<%= f.email_field :email, :class => :text %>
+					</span>
+					<small>Inserisci un indirizzo e-mail valido</small>
+					<div class="mandatory">Obbligatorio</div>
+					<div class="clearF"></div>
+				</li>
+
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :password %>
+						<%= f.password_field :password, :class => :text %>
+					</span>
+					<small>Inserisci la tua password</small>
+					<div class="mandatory">Obbligatorio</div>
+					<div class="clearF"></div>
+				</li>
+				
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :password_confirmation %>
+						<%= f.password_field :password_confirmation, :class => :text %>
+					</span>
+					<small>Conferma la tua password</small>
+					<div class="mandatory">Obbligatorio</div>
+					<div class="clearF"></div>
+				</li>
+				
+			</ol>
+			
+			<div class="su-form-button">
+				<%= f.submit "Registrati" %>
+			</div>
+		</div>
+	</div>
+<% end %>
+

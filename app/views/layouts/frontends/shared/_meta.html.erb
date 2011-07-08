@@ -1,0 +1,45 @@
+
+<%
+if "category_frontend" == params[:action]
+  	@title = @category.title
+	@meta_key = @category.title
+	@meta_description = @category.title
+elsif "blog_post" == params[:action]
+	@title = @post.title
+	@meta_key = @post.title
+	@meta_description = @post.intro
+elsif "blog_argument" == params[:action]
+	@title = @argument.name
+	@meta_key = @argument.name
+	@meta_description = ""
+elsif "frontend_company" == params[:action]
+	@title = @company.name
+	@meta_key = ""
+	@meta_description = @company.description
+elsif "frontend_question" == params[:action]
+	@question.mtitle.blank? ? @title = @question.title : @title = @question.mtitle
+	@question.mdescription.blank? ? @title = @question.body : @title = @question.mdescription
+	@meta_key = @question.mkey
+# registration
+elsif request.fullpath=="/users/sign_up"
+	@container = Container.where(:place_holder=>"registration").first
+  @title = @container.mtitle
+	@meta_key = @container.mkey
+	@meta_description = @container.mdescription	
+# login
+elsif request.fullpath=="/users/sign_in"
+	@container = Container.where(:place_holder=>"login").first
+  @title = @container.mtitle
+	@meta_key = @container.mkey
+	@meta_description = @container.mdescription	
+else
+ 	@meta_key = @container.mkey
+	@meta_description = @container.mdescription
+ 	@title = @container.mtitle        
+end
+%>
+
+<title><%= @title %></title> 
+<meta name="keywords" content="<%= @meta_key %>" />
+<meta name="descriptions" content="<%=  @meta_description %>" />
+

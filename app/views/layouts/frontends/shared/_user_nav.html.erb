@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+	Benvenuto <%= current_user.displayName %> | 
+	<%= link_to "Nuova domanda", frontend_path(Container.where(:place_holder => "new_question").first) %> |
+	<%= link_to "Le mie domande", frontend_path(Container.where(:place_holder => "user_questions").first) %> |
+	<%= link_to "Admin |", companies_path if current_user.role?(:company) %>
+	<%= link_to "Logout", destroy_user_session_path %>
+<% else %>
+	<%= link_to "Login", new_user_session_path %> o
+	<%= link_to "Registrati", new_user_registration_path %>
+<% end %>

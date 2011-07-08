@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  parent_id: 1
+  is_public: 1
+  order_show: 1
+  template: MyString
+  user_id: 1
+  mkey: MyString
+  mdescription: MyString
+  mtitle: MyString
+  slug: MyString
+
+two:
+  name: MyString
+  description: MyText
+  parent_id: 1
+  is_public: 1
+  order_show: 1
+  template: MyString
+  user_id: 1
+  mkey: MyString
+  mdescription: MyString
+  mtitle: MyString
+  slug: MyString

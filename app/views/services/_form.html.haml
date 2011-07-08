@@ -1,0 +1,14 @@
+.group
+  = f.label :category_id, t("activerecord.attributes.service.category_id", :default => "Category"), :class => :label
+  = f.collection_select :category_id, Category.first_level, :id, :title
+  %span.description Ex: a simple text
+.group
+  = f.label :company_id, t("activerecord.attributes.service.company_id", :default => "Company"), :class => :label
+  = f.collection_select :company_id, Company.all, :id, :name
+  %span.description Ex: a simple text
+.group.navform.wat-cf
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
+    = t("web-app-theme.save", :default => "Save")
+  %span.text_button_padding= t("web-app-theme.or", :default => "or")
+  = link_to t("web-app-theme.cancel", :default => "Cancel"), services_path, :class => "text_button_padding link_button"

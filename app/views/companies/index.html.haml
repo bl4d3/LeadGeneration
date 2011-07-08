@@ -1,0 +1,31 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", companies_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_company_path
+  .content
+    %h2.title
+      Le tue aziende
+    .inner
+      %table.table
+        %tr
+          %th Nome
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @companies.each do |company|
+          %tr{:class => cycle("odd", "even")}
+            %td= company.name
+            %td
+              = f_date(company.created_at)
+            %td.last
+              - if current_user.role?(:company)
+                = link_to "Visualizza", frontend_company_company_path(company), :target => "_blank"
+              - else
+                = link_to "#{t("web-app-theme.show", :default => "Show")}", company_path(company)
+              |
+              = link_to "#{t('web-app-theme.edit', :default => 'Edit')}", edit_company_path(company)
+              |
+              = link_to "#{t('web-app-theme.delete', :default => 'Delete')}", company_path(company), :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
+      .actions-bar.wat-cf
+        .actions
+- content_for :sidebar, render(:partial => 'sidebar')

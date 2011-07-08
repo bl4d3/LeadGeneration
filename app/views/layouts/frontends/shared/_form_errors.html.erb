@@ -1,0 +1,6 @@
+<% if obj.errors.any? %>  
+<div id="errorExplanation_frontend">  
+  	<h2>
+		<%= obj.errors.size==1 ? "#{obj.errors.count} errore" : "#{obj.errors.count} errori" %>
+	</h2></div>  
+<% end %>

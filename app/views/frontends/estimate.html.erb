@@ -1,0 +1,129 @@
+<%= form_for @estimate, :url => create_estimate_frontends_path, :html => { :class => :form } do |f| %>
+
+<%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @estimate} %>
+
+<%= fix_text(@container.description) %>
+<h1>Richiedi preventivo</h1>
+
+<div class="box-form">
+		<div class="su-form">
+       	<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :name %>
+					<%= f.text_field :name, :class => :text %>
+                    
+                </span>
+                <small>Nome o ragione sociale della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :lastname %>
+					<%= f.text_field :lastname, :class => :text %>
+                    
+                </span>
+                <small>P.IVA della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :address %>
+					<%= f.text_field :address, :class => :text %>
+                    
+                </span>
+                <small>P.IVA della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :city_id %>
+					<%= f.autocomplete_field :city_name, autocomplete_city_name_companies_path, :class => :text, :id_element => "#estimate_city_id" %>
+					<%= f.hidden_field :city_id %>
+                    
+                </span>
+                <small>Digita la citt&agrave; dove risiede la tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :email %>
+					<%= f.text_field :email, :class => :text %>
+                    
+                </span>
+                <small>P.IVA della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :phone %>
+					<%= f.text_field :phone, :class => :text %>
+                    
+                </span>
+                <small>P.IVA della tua azienda</small>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :note %>
+					<%= f.text_area :note, :class => :text %>
+                    
+                </span>
+                <small>Informazioni sul tuo matrimonio</small>
+                <div class="clearF"></div>
+            </li>
+
+		</ol>
+	</div>
+</div>
+
+
+<h1>Servizi richiesti</h1>
+<div class="box-form">
+	<div class="su-form">
+		<ol>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :category %>
+					<div class="select_categories">
+					<% for category in Category.all %>
+				    <div>
+				      <%= check_box_tag "estimate[category_ids][]", category.id, @estimate.categories.include?(category) %>
+				      <%= category.title %>
+					</div>
+					<% end %>
+					</div>
+                </span>
+                <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
+                <div class="clearF"></div>
+            </li>
+			<li class="nest_item">
+                <span class="item">
+                    <%= f.label :privacy %>
+					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:name => "Privacy").first) %>
+                </span>
+				<div class="mandatory">Obbligatorio</div>
+                <div class="clearF"></div>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="su-form-button">
+	<%= f.submit "Richiedi preventivi" %>
+</div>
+
+
+<% end %>

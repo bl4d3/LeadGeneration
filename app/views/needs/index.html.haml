@@ -1,0 +1,34 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", needs_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_need_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Needs
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.need.category_id", :default => t("activerecord.labels.category_id", :default => "Category_id"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @needs.each do |need|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = need.id
+            %td
+              = link_to need.category_id, need_path(need)
+            %td
+              = need.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", need_path(need)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_need_path(need)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", need_path(need), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+        = paginate @needs
+- content_for :sidebar, render(:partial => 'sidebar')

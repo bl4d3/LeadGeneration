@@ -1,0 +1,34 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", cities_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_city_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Cities
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.city.name", :default => t("activerecord.labels.name", :default => "Name"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @cities.each do |city|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = city.id
+            %td
+              = link_to city.name, city_path(city)
+            %td
+              = city.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", city_path(city)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_city_path(city)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", city_path(city), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+        = paginate @cities
+- content_for :sidebar, render(:partial => 'sidebar')

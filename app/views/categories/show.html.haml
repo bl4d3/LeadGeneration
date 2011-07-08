@@ -1,0 +1,27 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", categories_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_category_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", category_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.category.title", :default => t("activerecord.labels.title", :default => "Title"))
+          \:
+        = @category.title
+      %p
+        %b
+          = t("activerecord.attributes.category.description", :default => t("activerecord.labels.description", :default => "Description"))
+          \:
+        = @category.description.html_safe
+      %p
+        %b
+          = t("activerecord.attributes.category.parent_id", :default => t("activerecord.labels.parent_id", :default => "Parent"))
+          \:
+        = @category.parent_id
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_category_path(@category), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), category_path(@category), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

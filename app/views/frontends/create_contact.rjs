@@ -1,0 +1,5 @@
+ if @contact.save
+    page.replace_html "box_newsletter", "<h1>Grazie per esserti iscritto alla nostra newsletter!</h1>"
+  else
+    page.replace_html "box_newsletter", :partial => "layouts/frontends/shared/newsletter"
+  end

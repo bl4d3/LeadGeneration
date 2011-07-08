@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<%= render :partial => "layouts/frontends/shared/meta" %>
+		<%= stylesheet_link_tag "site/style_site.css", "token-input", "jquery-ui-1.8.13.custom" %>
+		<%= javascript_include_tag :defaults, "autocomplete-rails.js", "jquery.tokeninput.js"  %>
+
+    <!--[if IE 7]>
+      <link href="css/style_fix_ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+	</head>
+	<body>
+		<%= render :partial => "layouts/frontends/shared/header_up" %>
+
+		
+		<div class="header">
+			<%= render :partial => "layouts/frontends/shared/header" %>
+			
+			
+			<%= render :partial => "layouts/frontends/shared/adv" %>
+			
+			<div class="page text_style">
+				<%= yield %>
+			</div><!-- end page -->			
+						
+		</div><!-- end header -->
+		
+		<%= render :partial => "layouts/frontends/shared/footer" %>
+		
+	</body>
+</html>

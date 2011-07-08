@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Untitled Page</title>
+		<link rel="shortcut icon" href="favicon.ico">
+    <link href="/stylesheets/site/style_site.css" rel="stylesheet" type="text/css" />
+    <!--[if IE 7]>
+      <link href="css/style_fix_ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+	</head>
+	<body>
+		<div class="header_up">
+			<div class="center">
+				<div class="left">
+					<div class="nav">
+						<%= root_node("main_navigation").html_safe %>
+					</div>
+				</div>
+				
+				<div class="right">
+					<h1>Message Message Message</h1>
+				</div>
+				<div class="clearF"></div>
+			</div>
+		</div><!-- end header up -->
+		
+		<div class="header">
+			<div class="box_center">
+				<div class="box_left">
+					<img src="/images/site/matrimonio_logo.jpg" />
+				</div>
+				<div class="box_right">
+					<a href="#"><img src="/images/site/social_32/facebook.png" /></a>
+					<a href="#"><img src="/images/site/social_32/twitter.png" /></a>
+					<a href="#"><img src="/images/site/social_32/rss.png" /></a>
+					<a href="#"><img src="/images/site/social_32/youtube.png" /></a>
+				</div>
+				<div class="clearF"></div>
+			</div><!-- end box_center -->
+			<hr />
+			<div class="sub_nav">
+				<%= sub_nav("sub_nav").html_safe %>
+				<div class="clearF"></div>
+			</div><!-- end sub nav -->
+			
+			<div class="adv">
+				<div class="box_left">
+					banner adv goes here
+				</div>
+				<div class="box_right">
+					social media connector goes here
+				</div>				
+				<div class="clearF"></div>				
+			</div><!-- end adv -->
+			
+			<div class="page text_style">
+				<div class="box_left">
+					<%= yield %>
+					<%= @container.description.html_safe %>
+				</div>
+				<div class="box_right">
+					right nav goes here
+				</div>				
+				<div class="clearF"></div>		
+			</div><!-- end page -->
+			
+			<div class="closer">
+				<div class="item">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<div class="item borded_pink">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<div class="item">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>								
+				<div class="clearF"></div>		
+			</div><!-- end closer -->
+						
+		</div><!-- end header -->
+		
+		<div class="footer">
+			<div class="items">
+				<div class="item">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<div class="item borded_white">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<div class="item">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+			<div class="clearF"></div>
+		</div><!-- end footer -->
+	</body>
+</html>

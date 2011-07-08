@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>NUOVO PREVENTIVO</h1>
+		<p>
+			<%= humanize_estimate(@estimate).html_safe %>
+			
+		</p>
+		<h1>LO SPEDIRAI HA</h1>
+    <p>
+    	<%= humanize_companies(@companies).html_safe %>
+		</p>
+    
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>
