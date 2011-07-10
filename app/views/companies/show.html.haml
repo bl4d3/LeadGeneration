@@ -1,5 +1,52 @@
 .block
   .secondary-navigation
+    %h2 Preventivi per #{@company.name}
+  .content
+    %h2 Filtra le richieste di preventivo ricevute
+    - form_for @search, :remote => true do |f|
+      = hidden_field_tag :company_id, @company.id
+      %table.table
+        %tr
+          %td= f.label :estimate_name_contains, "Nome"
+          %td= f.text_field :estimate_name_contains
+        %tr
+          %td= f.label :estimate_lastname_contains, "Cognome"
+          %td= f.text_field :estimate_lastname_contains
+        %tr
+          %td= f.label :estimate_email_contains, "E-mail"
+          %td= f.text_field :estimate_email_contains
+        %tr
+          %td= f.label :estimate_phone_contains, "Telefono"
+          %td= f.text_field :estimate_phone_contains
+        %tr
+          %td= f.label :estimate_created_at_gte, "Data ricezione da"
+          %td= f.text_field :estimate_created_at_gte
+        %tr
+          %td= f.label :estimate_created_at_lte, "Data ricezione a" 
+          %td= f.text_field :estimate_created_at_lte
+        %tr
+          %td{:colspan=>2}= f.submit "Filtra"
+
+    .inner
+      - unless @delivers.blank?
+        %table.table
+          %thead
+            %tr
+              %th ID
+              %th Data di inserimento
+              %th Nome
+              %th Cognome
+              %th Citt&agrave;
+              %th
+          %tbody#delivers
+            = render "deliver", :delivers => @delivers
+        #paginator
+          = paginate @delivers, :remote => true
+      - else
+        %p Nessun preventivo
+
+.block
+  .secondary-navigation
     %ul.wat-cf
       %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", companies_path
       %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_company_path
@@ -108,20 +155,17 @@
           %b
             = t("activerecord.attributes.company.user_id", :default => t("activerecord.labels.user_id", :default => "User"))
             \:
-          = @company.user_id
+          = @company.user.email unless @company.user.blank?
       %p
         %b
           Zone di competenza
           \:
-        - @company.departments.each do |department|
-          = department.name
+        = @company.departments.map(&:name).join(", ")
       %p
         %b
           Categorie
           \:
-        - @company.categories.each do |category|
-          = category.title
-	      
+        = @company.categories.map(&:title).join(", ")
       .wat-cf
         = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_company_path(@company), :class => "button"
         = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), company_path(@company), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"

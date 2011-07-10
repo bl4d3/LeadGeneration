@@ -12,7 +12,10 @@ class Ability
       can [:index, :new, :create,:autocomplete_city_name], Company
       can [:show, :edit, :update, :destroy], Company, :user_id => user.id
       can [:index, :show, :create, :new], Question
-
+      
+      # TODO set right permission
+      can :index, Deliver
+      
       can [:index], Post
       can [:show, :edit, :update, :create, :new], Post, :user_id => user.id
     elsif user.role?(:guest)

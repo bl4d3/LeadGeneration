@@ -1,13 +1,16 @@
 class DeliversController < ApplicationController
+  load_and_authorize_resource
+  layout 'companies'
   # GET /delivers
   # GET /delivers.xml
   def index
-    @delivers = Deliver.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @delivers }
-    end
+    #@delivers = Deliver.all
+    @search = Deliver.where(:company_id => params[:company_id]).search(params[:search])
+    
+    @search.meta_sort ||= 'created_at.desc'
+    @delivers = Kaminari.paginate_array(@search.all).page(params[:page])
+    
+    logger.info "\nindex\n"
   end
 
   # GET /delivers/1

@@ -1,1 +1,59 @@
 /* Override here any style defined by web-app-theme */
+.secondary-navigation h2{
+	color: #fff;
+  left: 10px;
+  position: relative;
+  top: 9px;
+}
+
+#header{
+	height:80px;
+}
+
+.pagination{
+	text-align:center;
+}
+
+.pagination a, .pagination span, .pagination em {
+	
+	border-style: none;
+	    border-width: none;
+	    display: inline;
+	    float: none;
+
+}
+
+.pagination .current{
+	background: #E6007E;
+	color:#fff;
+}
+
+.pagination a{
+	background:none;
+}
+.pagination a:hover{
+	border:none;
+	background: #E6007E;
+	color:#fff;
+}
+
+.pagination .page:hover, .pagination .next:hover, .pagination .last:hover, .pagination .prev:hover, .pagination .first:hover{
+	border:none;
+	background: #E6007E;
+	color:#fff;
+}
+
+input[type="submit"]{
+background-color: #EEEEEE;
+border: 1px solid #BFBFBF;
+color: #222222;
+cursor: pointer;
+display: block;
+float: left;
+font-size: 1em;
+font-weight: bold;
+line-height: 1.3em;
+margin: 0 7px 0 0;
+padding: 5px 10px 6px 7px;
+text-decoration: none;
+}

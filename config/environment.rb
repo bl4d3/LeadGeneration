@@ -6,6 +6,7 @@ QUESTIONS_IN_FOOTER = 5
 PP_COMPANIES = 5
 SEND_MAIL = true
 SEND_REPORT_ADMIN = true
+ESTIMATE_FOR_COMPANY = 3
 
 # Initialize the rails application
 LeadGeneration::Application.initialize!

@@ -7,6 +7,7 @@ class Company < ActiveRecord::Base
 	# ASSOCIATIONS
 	belongs_to :city
 	belongs_to :department
+	belongs_to :user
 	
 	has_many :zones, :dependent => :destroy
 	accepts_nested_attributes_for :zones, :allow_destroy => true
@@ -48,7 +49,10 @@ class Company < ActiveRecord::Base
     
     @companies = []
     check = true
-    rank = category.companies.joins(:zones).where(:is_enabled => 1, :zones => {:department_id => department.id}).minimum(:rank)
+    rank_array = category.companies.joins(:zones).where(:is_enabled => 1, :zones => {:department_id => department.id}).order(:rank).map(&:rank).uniq
+    
+    index = 0
+    rank = rank_array[index]
     
     while check
       
@@ -63,9 +67,10 @@ class Company < ActiveRecord::Base
           end
         end
         
-        if @companies.size < max
+        if @companies.size < max && index < rank_array.size 
           check = true
-          rank = rank.to_i + 1
+          index += 1
+          rank = rank_array[index]
         else
           check = false
         end

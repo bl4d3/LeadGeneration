@@ -22,7 +22,18 @@ $(document).ready(function() {
 	    crossDomain: false,
 	    prePopulate: $("#company_department_tokens").data("pre"),
 	  });
+	
+	init_show_deliver();
+	$( "#search_estimate_created_at_gte" ).datepicker();
+	$( "#search_estimate_created_at_lte" ).datepicker();
 });
+
+function init_show_deliver(){
+	$('.show_deliver').click(function() {
+		$('#deliver_'+$(this).attr("id")).toggle("slow")
+		return false;
+	});
+}
 
 function remove_fields(link) {
 	$(link).siblings("input[type=hidden]:first").attr('value', '1');

@@ -89,16 +89,21 @@ class FrontendsController < ApplicationController
           if SEND_REPORT_ADMIN
             @companies = []
             @estimate.categories.each do |category|
-              Company.calculate(3, category, @estimate.city.department).each do |company|
+              Company.calculate(ESTIMATE_FOR_COMPANY, category, @estimate.city.department).each do |company|
                  
                 unless @companies.include?(company)
                     @companies << company
+                    # update the rank
                     company.update_attribute(:rank, company.rank+1)
+                    # keep trace of delivered emails...
+                    Deliver.create(:estimate_id => @estimate.id, :company_id => company.id, :is_delivered => false)
+                    
                 end
               end
             end
           
             unless @companies.blank?
+              # send email to admin
               Notification.deliver_estimate_admin(@estimate, @companies) if SEND_MAIL
             else
               logger.info "\n --- no companies \n"

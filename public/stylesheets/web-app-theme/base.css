@@ -462,3 +462,18 @@ li{list-style: none;}
 	display: inline;
 	float: right;
 }
+
+input[type="submit"]{
+	background-color: #EEEEEE;
+  border: 1px solid #BFBFBF;
+  color: #222222;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.3em;
+  margin: 0 7px 0 0;
+  padding: 5px 10px 6px 7px;
+  text-decoration: none;
+}

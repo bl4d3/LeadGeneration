@@ -13,9 +13,14 @@ class CompaniesController < ApplicationController
   def index
     #@companies = Company.all(current_user)
     
-    @companies = Company.all(current_user)
-    @companies = Kaminari.paginate_array(@companies).page(params[:page])
+    #@companies = Company.all(current_user)
+    #@companies = Kaminari.paginate_array(@companies).page(params[:page])
 
+
+    @companies = Company.all(current_user)
+    @search = @companies.search(params[:search])
+    @search.meta_sort ||= 'created_at.desc'
+    @companies = Kaminari.paginate_array(@search.all).page(params[:page]).per(1)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,11 +32,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1.xml
   def show
     @company = Company.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @company }
-    end
+    @search = @company.delivers.search(params[:search])
+    @search.meta_sort ||= 'created_at.desc'
+    @delivers = Kaminari.paginate_array(@search.all).page(params[:page])    
   end
 
   # GET /companies/new

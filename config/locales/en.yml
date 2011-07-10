@@ -45,6 +45,8 @@ en:
         privacy: "Privacy"
         url_site: "Sito internet"
         category_id: "Categorie"
+        department_id: "Provincia"
+        timetable: "Orari di apertura"
       question:
         title: "La tua domanda"
         email: "E-mail"

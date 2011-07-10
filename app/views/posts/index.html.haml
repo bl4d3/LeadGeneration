@@ -14,23 +14,23 @@
             = t("activerecord.attributes.post.title", :default => t("activerecord.labels.title", :default => "Title"))
           %th= t("web-app-theme.created_at", :default => "Created at")
           %th.last &nbsp;
-        - unless @posts.blank?
-          - @posts.each do |post|
-            %tr{:class => cycle("odd", "even")}
-              %td
-                = link_to post.title, post_path(post)
-              %td
-                = f_date(post.created_at)
-              %td.last
-                - if current_user.role?(:company) && post.is_public
-                  = link_to "#{t("web-app-theme.show_site", :default => "Show")}", blog_post_frontend_path(post), :target => "_blank"
-                - else
-                  = link_to "#{t("web-app-theme.show", :default => "Show")}", post_path(post)
-                = link_to "#{t('web-app-theme.edit', :default => 'Edit')}", edit_post_path(post)
-                = link_to "#{t('web-app-theme.delete', :default => 'Delete')}", post_path(post), :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
-        .actions-bar.wat-cf
-          .actions
-          = paginate @posts
-        - else
-          %p Nessun post  
+          - unless @posts.blank?
+            - @posts.each do |post|
+              %tr{:class => cycle("odd", "even")}
+                %td
+                  = link_to post.title, post_path(post)
+                %td
+                  = f_date(post.created_at)
+                %td.last
+                  - if current_user.role?(:company) && post.is_public
+                    = link_to "#{t("web-app-theme.show_site", :default => "Show")}", blog_post_frontend_path(post), :target => "_blank"
+                  - else
+                    = link_to "#{t("web-app-theme.show", :default => "Show")}", post_path(post)
+                  = link_to "#{t('web-app-theme.edit', :default => 'Edit')}", edit_post_path(post)
+                  = link_to "#{t('web-app-theme.delete', :default => 'Delete')}", post_path(post), :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
+          .actions-bar.wat-cf
+            .actions
+            = paginate @posts
+          - else
+            %p Nessun post  
 - content_for :sidebar, render(:partial => 'sidebar')

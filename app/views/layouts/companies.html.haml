@@ -49,6 +49,9 @@
             - if can? :manage, Estimate
               %li
                 = link_to "Preventivi", estimates_path
+            - if can? :manage, Deliver
+              %li
+                = link_to "Invii", delivers_path
             - if can? :manage, Contact
               %li
                 = link_to "Contatti", contacts_path
