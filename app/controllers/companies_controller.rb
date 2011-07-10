@@ -20,7 +20,7 @@ class CompaniesController < ApplicationController
     @companies = Company.all(current_user)
     @search = @companies.search(params[:search])
     @search.meta_sort ||= 'created_at.desc'
-    @companies = Kaminari.paginate_array(@search.all).page(params[:page]).per(1)
+    @companies = Kaminari.paginate_array(@search.all).page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
