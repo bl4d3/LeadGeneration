@@ -1,0 +1,11 @@
+- @delivers.each do |deliver|
+  %tr
+    %td= deliver.id
+    %td= deliver.created_at.strftime("%m/%d/%Y %H:%M")
+    %td= deliver.estimate.name
+    %td= deliver.estimate.lastname
+    %td= deliver.estimate.city.name
+    %td= link_to "Visualizza", "#", :id => deliver.estimate.id, :class => "show_deliver"
+  %tr
+    %td{:style => "border:none;padding:0px;", :colspan=>3}
+      = render :partial => "estimates/show", :locals => {:estimate => deliver.estimate}

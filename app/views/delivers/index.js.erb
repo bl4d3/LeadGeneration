@@ -1,0 +1,3 @@
+$('#delivers').html('<%= escape_javascript render "companies/deliver", :delivers => @delivers %>');
+$('#paginator').html('<%= escape_javascript(paginate(@delivers, :remote => true).to_s) %>');
+init_show_deliver();
