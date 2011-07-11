@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :displayName, :info
   before_create :set_role
   
-  validates :displayName, :presence => true
   
   has_many :questions
   has_many :companies
