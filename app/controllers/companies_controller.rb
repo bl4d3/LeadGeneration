@@ -62,6 +62,10 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
+        if SEND_MAIL
+          args = [MAIL_TO, MAIL_FROM,"[BACKEND] Nuova azienda inserita",humanize_company(@company)]
+          QueuedEmails.add("Notification","notify_raw", args, 0)
+        end
         format.html { redirect_to(@company, :notice => 'Company was successfully created.') }
         format.xml  { render :xml => @company, :status => :created, :location => @company }
       else

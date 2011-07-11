@@ -63,7 +63,10 @@ class FrontendsController < ApplicationController
       
       respond_to do |format|
         if @company.save
-          Notification.deliver_notify(6) if SEND_MAIL
+          if SEND_MAIL
+            args = [MAIL_TO, MAIL_FROM, "Nuova azienda segnalata",humanize_company(@company)]
+            QueuedEmails.add("Notification","notify_raw", args, 0)
+          end
           format.html { render :action => "signaled_company",:layout => "layouts/frontends/signal_company" }
         else
           format.html { render :action => "signal_company",:layout => "layouts/frontends/signal_company" }
@@ -84,7 +87,10 @@ class FrontendsController < ApplicationController
       
       respond_to do |format|
         if @estimate.save
-          Notification.deliver_notify(7) if SEND_MAIL
+          if SEND_MAIL
+            args = [MAIL_TO,MAIL_FROM,"Richiesta di preventivo",humanize_estimate(@estimate)]
+            QueuedEmails.add("Notification","notify_raw", args, 0)
+          end
           
           if SEND_REPORT_ADMIN
             @companies = []
@@ -104,7 +110,10 @@ class FrontendsController < ApplicationController
           
             unless @companies.blank?
               # send email to admin
-              Notification.deliver_estimate_admin(@estimate, @companies) if SEND_MAIL
+              if SEND_MAIL
+                args = [MAIL_TO,MAIL_FROM,"[AZIENDE] Richiesta di preventivo","<h3>PREVENTIVO:</h3>#{humanize_estimate(@estimate)}<br/><br/><h3>DA SPEDIRE A:</h3>#{humanize_companies(@companies)}"]
+                QueuedEmails.add("Notification","notify_raw", args, 0)
+              end
             else
               logger.info "\n --- no companies \n"
             end
@@ -122,7 +131,10 @@ class FrontendsController < ApplicationController
     
     respond_to do |format|
       if @question.save
-        Notification.deliver_notify(7) if SEND_MAIL
+        if SEND_MAIL
+          args = [MAIL_TO,MAIL_FROM,"Nuova domanda","#{@question.title}<br>#{@question.body}"]
+          QueuedEmails.add("Notification","notify_raw", args, 0)
+        end
         @container = Container.where(:place_holder => "created_question").first
         #format.html { render :template => "frontends/#{@container.template}", :layout => "layouts/frontends/#{@container.template}" }    
         format.html { redirect_to frontend_question_question_path(@question) }
@@ -142,7 +154,10 @@ class FrontendsController < ApplicationController
     
       if commentable.save
         @comment = Comment.new
-        Notification.deliver_notify(2) if SEND_MAIL
+        if SEND_MAIL
+          args = [MAIL_TO,MAIL_FROM,"Domanda commentata","#{@question.title}<br>#{@question.body}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
+          QueuedEmails.add("Notification","notify_raw", args, 0)
+        end
         redirect_to frontend_question_question_path(@question) 
       else
         @comment = commentable
@@ -161,7 +176,11 @@ class FrontendsController < ApplicationController
     
       if commentable.save
         @comment = Comment.new
-        Notification.deliver_notify(4) if SEND_MAIL
+        if SEND_MAIL
+          args = [MAIL_TO,MAIL_FROM,"Post commentato","#{@post.title}<br>#{@post.intro}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
+          QueuedEmails.add("Notification","notify_raw", args, 0)
+        end
+          
         render :template => "frontends/blog_post", :layout => "layouts/frontends/blog"
         
       else
@@ -225,8 +244,10 @@ class FrontendsController < ApplicationController
   
   def create_contact
     @contact = Contact.new(params[:contact])
-    Notification.deliver_notify(8) if SEND_MAIL
-    
+    if SEND_MAIL
+      args = [MAIL_TO,MAIL_FROM,"Nuovo contatto per newsletter","#{@contact.email}"]
+      QueuedEmails.add("Notification","notify_raw", args, 0)
+    end    
     @container = Container.first
   end
   
@@ -251,6 +272,11 @@ class FrontendsController < ApplicationController
   def cookie_post
     cookies.delete :question_id
     cookies[:post_id] = @post.id
+  end
+  
+  def send_mail
+    QueuedEmails.send_email
+    render :inline => ""
   end
   
 end

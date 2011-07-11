@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mailer: MyString
+  mailer_method: MyString
+  args: MyText
+  priority: 1
+
+two:
+  mailer: MyString
+  mailer_method: MyString
+  args: MyText
+  priority: 1

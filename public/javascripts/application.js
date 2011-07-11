@@ -24,8 +24,13 @@ $(document).ready(function() {
 	  });
 	
 	init_show_deliver();
+	
 	$( "#search_estimate_created_at_gte" ).datepicker();
 	$( "#search_estimate_created_at_lte" ).datepicker();
+	
+	$( "#search_created_at_gte" ).datepicker();
+	$( "#search_created_at_lte" ).datepicker();
+	
 });
 
 function init_show_deliver(){

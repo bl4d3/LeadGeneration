@@ -71,6 +71,8 @@ LeadGeneration::Application.routes.draw do
     # feed
     get :sitemap, :on => :collection
     get :blogfeed, :on => :collection
+    # send queued emails
+    get :send_mail, :on => :collection
   end
   
   # show question
@@ -78,6 +80,7 @@ LeadGeneration::Application.routes.draw do
   # show post
   match 'blog-matrimomio/(:id)' => "frontends#blog_post", :as => :blog_post_frontend
   
+  match 'q' => "frontends#send_mail"
   
   
   # TODO naming routes...

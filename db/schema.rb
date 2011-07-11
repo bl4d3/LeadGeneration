@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708202046) do
+ActiveRecord::Schema.define(:version => 20110710093808) do
 
   create_table "arguments", :force => true do |t|
     t.string   "name"
@@ -186,6 +186,15 @@ ActiveRecord::Schema.define(:version => 20110708202046) do
   end
 
   add_index "questions", ["ancestry"], :name => "index_questions_on_ancestry"
+
+  create_table "queued_emails", :force => true do |t|
+    t.string   "mailer"
+    t.string   "mailer_method"
+    t.text     "args"
+    t.integer  "priority",      :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "services", :force => true do |t|
     t.integer  "category_id"

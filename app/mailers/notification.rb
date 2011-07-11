@@ -41,5 +41,10 @@ class Notification < ActionMailer::Base
     mail(:to => "mattia.lipreri@gmail.com",
          :subject => "MI [#{@msg}]")
   end
+  
+  def notify_raw(to, from, subject, content)
+    @content = content
+    mail(:from => from, :to => to, :subject => subject)
+  end
     
 end
