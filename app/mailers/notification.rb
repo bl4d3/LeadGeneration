@@ -46,5 +46,16 @@ class Notification < ActionMailer::Base
     @content = content
     mail(:from => from, :to => to, :subject => subject)
   end
+  
+  def estimate_request(to, from, subject, content)
+    @content = content
+    mail(:from => from, :to => to, :subject => subject)
+  end
+  
+  
+  def reply_to_question(to, from, subject, id)
+    @question = Question.find(id)
+    mail(:from => from, :to => to, :subject => subject)
+  end
     
 end

@@ -64,7 +64,7 @@ class FrontendsController < ApplicationController
       respond_to do |format|
         if @company.save
           if SEND_MAIL
-            args = [MAIL_TO, MAIL_FROM, "Nuova azienda segnalata",humanize_company(@company)]
+            args = [MAIL_TO, MAIL_FROM, "[ADMIN] Nuova azienda segnalata",humanize_company(@company)]
             QueuedEmails.add("Notification","notify_raw", args, 0)
           end
           format.html { render :action => "signaled_company",:layout => "layouts/frontends/signal_company" }
@@ -88,7 +88,7 @@ class FrontendsController < ApplicationController
       respond_to do |format|
         if @estimate.save
           if SEND_MAIL
-            args = [MAIL_TO,MAIL_FROM,"Richiesta di preventivo",humanize_estimate(@estimate)]
+            args = [MAIL_TO,MAIL_FROM,"[ADMIN] Richiesta di preventivo",humanize_estimate(@estimate)]
             QueuedEmails.add("Notification","notify_raw", args, 0)
           end
           
@@ -109,10 +109,17 @@ class FrontendsController < ApplicationController
             end
           
             unless @companies.blank?
-              # send email to admin
+              
               if SEND_MAIL
-                args = [MAIL_TO,MAIL_FROM,"[AZIENDE] Richiesta di preventivo","<h3>PREVENTIVO:</h3>#{humanize_estimate(@estimate)}<br/><br/><h3>DA SPEDIRE A:</h3>#{humanize_companies(@companies)}"]
+                # send email to admin
+                args = [MAIL_TO,MAIL_FROM,"[ADMIN] Richiesta di preventivo","<h3>PREVENTIVO:</h3>#{humanize_estimate(@estimate)}<br/><br/><h3>DA SPEDIRE A:</h3>#{humanize_companies(@companies)}"]
                 QueuedEmails.add("Notification","notify_raw", args, 0)
+                # send email to company
+                @companies.each do |company|
+                  args = [company.email_address,MAIL_FROM,"[MatrimonioIdee] Richiesta di preventivo","#{humanize_estimate(@estimate)}"]
+                  QueuedEmails.add("Notification","estimate_request", args, 0)
+                end
+                
               end
             else
               logger.info "\n --- no companies \n"
@@ -132,7 +139,7 @@ class FrontendsController < ApplicationController
     respond_to do |format|
       if @question.save
         if SEND_MAIL
-          args = [MAIL_TO,MAIL_FROM,"Nuova domanda","#{@question.title}<br>#{@question.body}"]
+          args = [MAIL_TO,MAIL_FROM,"[ADMIN] Nuova domanda","#{@question.title}<br>#{@question.body}"]
           QueuedEmails.add("Notification","notify_raw", args, 0)
         end
         @container = Container.where(:place_holder => "created_question").first
@@ -155,8 +162,12 @@ class FrontendsController < ApplicationController
       if commentable.save
         @comment = Comment.new
         if SEND_MAIL
-          args = [MAIL_TO,MAIL_FROM,"Domanda commentata","#{@question.title}<br>#{@question.body}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
+          args = [MAIL_TO,MAIL_FROM,"[ADMIN] Domanda commentata","#{@question.title}<br>#{@question.body}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
           QueuedEmails.add("Notification","notify_raw", args, 0)
+          
+          args = [@question.user.email,MAIL_FROM,"[MatrimonioIdee.it] Risposta alla domanda #{@question.title}","#{@question.id}"]
+          QueuedEmails.add("Notification","reply_to_question", args, 0)
+          
         end
         redirect_to frontend_question_question_path(@question) 
       else
@@ -177,7 +188,7 @@ class FrontendsController < ApplicationController
       if commentable.save
         @comment = Comment.new
         if SEND_MAIL
-          args = [MAIL_TO,MAIL_FROM,"Post commentato","#{@post.title}<br>#{@post.intro}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
+          args = [MAIL_TO,MAIL_FROM,"[ADMIN] Post commentato","#{@post.title}<br>#{@post.intro}<h3>COMMENTO:</h3>#{commentable.title}<br/>#{commentable.comment}"]
           QueuedEmails.add("Notification","notify_raw", args, 0)
         end
           
@@ -237,7 +248,8 @@ class FrontendsController < ApplicationController
   def blog_argument
     @container = Container.where(:name => "Blog").first
     @argument = Argument.find(params[:id])
-    @posts = @argument.posts.where(:is_public => 1)
+    @posts = @argument.posts.where(:is_public => 1).page(params[:page])
+    
     @contact = Contact.new
     render :template => "frontends/blog", :layout => "layouts/frontends/blog"
   end
@@ -245,7 +257,7 @@ class FrontendsController < ApplicationController
   def create_contact
     @contact = Contact.new(params[:contact])
     if SEND_MAIL
-      args = [MAIL_TO,MAIL_FROM,"Nuovo contatto per newsletter","#{@contact.email}"]
+      args = [MAIL_TO,MAIL_FROM,"[ADMIN] Nuovo contatto per newsletter","#{@contact.email}"]
       QueuedEmails.add("Notification","notify_raw", args, 0)
     end    
     @container = Container.first

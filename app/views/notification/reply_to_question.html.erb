@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hai ricevuto una risposta alla tua domanda:</p>
+    <p>
+      <strong><%= @question.title %></strong>
+    </p>
+    <p>Per visualizzare la domanda premi <%= link_to "qui", root_url.chop+frontend_question_question_path(@question) %>.</p>
+    <p>oppure copia questo indirizzo nel tuo browser</p>
+    <p><%= root_url.chop+frontend_question_question_path(@question)  %></p>
+    <p>Grazie! Lo staff di MatrimonioIdee.it</p>
+  </body>
+</html>

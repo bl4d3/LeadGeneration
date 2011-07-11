@@ -10,6 +10,18 @@
   = f.label :parent_id, t("activerecord.attributes.category.parent_id", :default => "Parent"), :class => :label
   = f.collection_select :parent_id, Category.first_level, :id, :title, :include_blank => true
   %span.description Ex: a simple text
+.group
+  = f.label :mtitle, t("activerecord.attributes.category.mtitle", :default => "Meta title"), :class => :label
+  = f.text_area :mtitle, :class => 'text_field'
+  %span.description Ex: a simple text
+.group
+  = f.label :mkey, t("activerecord.attributes.category.mkey", :default => "Meta key"), :class => :label
+  = f.text_area :mkey, :class => 'text_field'
+  %span.description Ex: a simple text
+.group
+  = f.label :mdescription, t("activerecord.attributes.category.mdescription", :default => "Meta description"), :class => :label
+  = f.text_area :mdescription, :class => 'text_field'
+  %span.description Ex: a simple text
 .group.navform.wat-cf
   %button.button{:type => "submit"}
     = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")

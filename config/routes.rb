@@ -79,6 +79,7 @@ LeadGeneration::Application.routes.draw do
   match 'domanda-matrimonio/(:id)' => "frontends#frontend_question", :as => :frontend_question_question
   # show post
   match 'blog-matrimomio/(:id)' => "frontends#blog_post", :as => :blog_post_frontend
+  match 'blog/(:id)' => "frontends#blog_argument", :as => :blog_argument_frontend
   
   match 'q' => "frontends#send_mail"
   

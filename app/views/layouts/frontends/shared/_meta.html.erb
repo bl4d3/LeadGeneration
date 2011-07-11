@@ -1,9 +1,9 @@
 
 <%
 if "category_frontend" == params[:action]
-  	@title = @category.title
-	@meta_key = @category.title
-	@meta_description = @category.title
+	@title = @category.mtitle
+	@meta_key = @category.mkey
+	@meta_description = @category.mdescription
 elsif "blog_post" == params[:action]
 	@title = @post.title
 	@meta_key = @post.title
@@ -15,7 +15,11 @@ elsif "blog_argument" == params[:action]
 elsif "frontend_company" == params[:action]
 	@title = @company.name
 	@meta_key = ""
-	@meta_description = @company.description
+	unless @company.description.blank?
+	  @meta_description = truncate(@company.description.gsub(/<\/?[^>]*>/, "").gsub(/\n/, ' '), :length => 400) 
+  else
+  	@meta_description = ""    
+  end
 elsif "frontend_question" == params[:action]
 	@question.mtitle.blank? ? @title = @question.title : @title = @question.mtitle
 	@question.mdescription.blank? ? @title = @question.body : @title = @question.mdescription

@@ -21,6 +21,21 @@
           = t("activerecord.attributes.category.parent_id", :default => t("activerecord.labels.parent_id", :default => "Parent"))
           \:
         = @category.parent_id
+        %p
+          %b
+            = t("activerecord.attributes.category.mtitle", :default => t("activerecord.labels.mtitle", :default => "Meta title"))
+            \:
+          = @category.mtitle
+        %p
+          %b
+            = t("activerecord.attributes.category.mkey", :default => t("activerecord.labels.mkey", :default => "Meta key"))
+            \:
+          = @category.mkey
+        %p
+          %b
+            = t("activerecord.attributes.category.mdescription", :default => t("activerecord.labels.mdescription", :default => "Meta description"))
+            \:
+          = @category.mdescription
       .wat-cf
         = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_category_path(@category), :class => "button"
         = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), category_path(@category), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
