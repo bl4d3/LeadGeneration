@@ -164,13 +164,13 @@
 					<% end %>
 					</div>
                 </span>
-                <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
+                <small>Seleziona le varie categorie in qui opera la tua azienda.</small>
                 <div class="clearF"></div>
             </li>
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :privacy %>
-					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:name => "Privacy").first) %>
+					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:place_holder => "privacy").first) %>
 					
                 </span>
 				<div class="mandatory">Obbligatorio</div>

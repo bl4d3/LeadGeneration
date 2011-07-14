@@ -1,0 +1,9 @@
+<div class="banner">
+	<%= link_to image_tag("site/segnala_azienda.jpg"), new_company_frontends_path %>
+</div>
+
+<div class="banner">
+	<%= link_to image_tag("site/domande_matrimoni.jpg"), frontend_path(Container.where(:place_holder => "show_questions").first) %>
+</div>
+
+<%= questions_link.html_safe %>

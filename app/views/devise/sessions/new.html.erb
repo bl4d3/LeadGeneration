@@ -30,16 +30,6 @@
 					<div class="clearF"></div>
 				</li>
 
-				<% if devise_mapping.rememberable? -%>
-				<li class="nest_item">
-				 	<span class="item">
-						<%= f.label :remember_me %>
-						<%= f.check_box :remember_me %>
-					</span>
-					<small>Ricordami</small>
-					<div class="clearF"></div>
-				</li>
-				<% end -%>
 
 				<div class="su-form-button">
 					<%= f.submit "Login" %>
@@ -48,6 +38,8 @@
 		</div>
 	</div>
 <% end %>
-<br />
+
+<%= render :partial => "devise/shared/links" %>
+
 
 

@@ -84,7 +84,7 @@
 .group
   = f.label :privacy, t("activerecord.attributes.company.privacy", :default => "Privacy"), :class => :label
   = f.check_box :privacy
-  %span.description Accetto le normative sulla #{link_to "privacy", frontend_path(Container.where(:name => "Privacy").first), :target => "_blank"}
+  %span.description Accetto le normative sulla #{link_to "privacy", frontend_path(Container.where(:place_holder => "privacy").first), :target => "_blank"}
  
 .group
   = f.label :department_id, t("activerecord.attributes.company.department_id", :default => "Zone di competenza"), :class => :label

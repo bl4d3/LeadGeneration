@@ -22,8 +22,8 @@ elsif "frontend_company" == params[:action]
   end
 elsif "frontend_question" == params[:action]
 	@question.mtitle.blank? ? @title = @question.title : @title = @question.mtitle
-	@question.mdescription.blank? ? @title = @question.body : @title = @question.mdescription
-	@meta_key = @question.mkey
+	@question.mdescription.blank? ? @meta_description = @question.body : @meta_description = @question.mdescription
+	@question.mkey.blank? ? @meta_key = @question.title : @meta_key = @question.mkey
 # registration
 elsif request.fullpath=="/users/sign_up"
 	@container = Container.where(:place_holder=>"registration").first

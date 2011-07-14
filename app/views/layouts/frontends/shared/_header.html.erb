@@ -10,7 +10,14 @@
 			<%= link_to image_tag("site/social_32/rss.png"), "/blogfeed.xml" %>
 			
 		</div>
-		<%= link_to image_tag("site/login_azienda.jpg"), new_user_registration_path %>
+		<% if !current_user.blank? && current_user.role?(:guest) %>
+		  <%= image_tag("site/login_azienda.jpg") %>
+		<% elsif !current_user.blank? && current_user.role?(:company) %>
+	    <%= link_to image_tag("site/login_azienda.jpg"), companies_path %>
+		<% else %>
+		  <%= link_to image_tag("site/login_azienda.jpg"), new_user_registration_path %>
+		<% end %>
+		
 		
 		<div class="user_info">
 			<%= render :partial => "layouts/frontends/shared/user_nav" %>

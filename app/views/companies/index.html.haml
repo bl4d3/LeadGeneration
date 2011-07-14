@@ -4,35 +4,40 @@
       %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", companies_path
       %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_company_path
   .content
-    %h2.title
-      Le tue aziende
-    - form_for @search do |f|
-      %table.table
-        %tr
-          %td= f.label :name_contains, "Nome"
-          %td= f.text_field :name_contains
-        %tr
-          %td= f.label :piva_contains, "P.IVA"
-          %td= f.text_field :piva_contains
-        %tr
-          %td= f.label :email_address_contains, "E-mail"
-          %td= f.text_field :email_address_contains
-        %tr
-          %td= f.label :phone_contains, "Telefono"
-          %td= f.text_field :phone_contains
-        %tr
-          %td= f.label :is_enabled_is_false, "Non ancora attivata"
-          %td= f.check_box :is_enabled_is_false
-        %tr
-          %td= f.label :created_at_gte, "Data ricezione da"
-          %td= f.text_field :created_at_gte
-        %tr
-          %td= f.label :created_at_lte, "Data ricezione a" 
-          %td= f.text_field :created_at_lte
-        %tr
-          %td{:colspan=>2}= f.submit "Filtra"
-    .inner
-      - unless @companies.blank?
+    - if @companies.blank?
+      - if current_user.role?(:company)
+        %h1 E' il tuo primo accesso? Premi qui per #{link_to "inserire una nuova azienda", new_company_path}
+      - else
+        %p Nessuna azienda presente
+    - else
+      %h2.title
+        Le tue aziende
+      - form_for @search do |f|
+        %table.table
+          %tr
+            %td= f.label :name_contains, "Nome"
+            %td= f.text_field :name_contains
+          %tr
+            %td= f.label :piva_contains, "P.IVA"
+            %td= f.text_field :piva_contains
+          %tr
+            %td= f.label :email_address_contains, "E-mail"
+            %td= f.text_field :email_address_contains
+          %tr
+            %td= f.label :phone_contains, "Telefono"
+            %td= f.text_field :phone_contains
+          %tr
+            %td= f.label :is_enabled_is_false, "Non ancora attivata"
+            %td= f.check_box :is_enabled_is_false
+          %tr
+            %td= f.label :created_at_gte, "Data ricezione da"
+            %td= f.text_field :created_at_gte
+          %tr
+            %td= f.label :created_at_lte, "Data ricezione a" 
+            %td= f.text_field :created_at_lte
+          %tr
+            %td{:colspan=>2}= f.submit "Filtra"
+      .inner
         %table.table
           %tr
             %th Nome
@@ -58,8 +63,6 @@
                 = link_to "#{t('web-app-theme.delete', :default => 'Delete')}", company_path(company), :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
         #paginator
           = paginate @companies
-      - else
-        %p Nessuna azienda, premi qui per #{link_to "inserire una nuova azienda", new_company_path}
       .actions-bar.wat-cf
         .actions
 - content_for :sidebar, render(:partial => 'sidebar')

@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource)
-      logger.info "\n ...... #{current_user.role}\n"
       if !current_user.role?(:guest)
         stored_location_for(resource) || companies_path
       else
@@ -89,12 +88,17 @@ class ApplicationController < ActionController::Base
         # only turn it off for login pages:
         #is_a?(Devise::SessionsController) ? "companies" : "companies"
         logger.info "\n  --> #{params[:action]} \n"
-        if is_a?(Devise::SessionsController) || is_a?(Devise::RegistrationsController) || is_a?(Devise::PasswordsController)|| is_a?(Devise::UsersController)
+        if is_a?(Devise::SessionsController) || is_a?(Devise::RegistrationsController) || is_a?(Devise::PasswordsController) || is_a?(Devise::UsersController)
           if ["new", "create"].include?(params[:action])
             @container = Container.first
             "user"
           else
-            "companies"            
+            if is_a?(Devise::PasswordsController) && ["edit","update"].include?(params[:action])
+              @container = Container.first              
+              "user"
+            else
+              "companies"            
+            end
           end
         else 
           "companies"           

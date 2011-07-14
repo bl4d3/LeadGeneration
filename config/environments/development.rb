@@ -32,10 +32,10 @@ LeadGeneration::Application.configure do
 	config.action_mailer.smtp_settings = {
   	:address			=> "smtp.unbit.it",
   	:port					=> 25,
-  	:domain			=> "www.nerdydog.it",
+  	:domain			=> "www.matrimonioidee.it",
   	:authentication => :login,
-  	:user_name	=> "info@nerdydog.it",
-  	:password		=> "dulabiyff"
+  	:user_name	=> "info@matrimonioidee.it",
+  	:password		=> "!matmarmat.2010"
 	}  
 end
 

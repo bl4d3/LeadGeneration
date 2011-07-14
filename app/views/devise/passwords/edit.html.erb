@@ -1,16 +1,38 @@
-<h2>Change your password</h2>
+<h1>Cambia la tua passoword</h1>
+
+<p>Inserisci la tua nuova password.</p>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @user} %>
   <%= f.hidden_field :reset_password_token %>
+  
+	<div class="box-form">
+		<div class="su-form">
+	     <ol>
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :password %>
+						<%= f.password_field :password, :class => :text %>
+					</span>
+					<small>Inserisci la tua nuova password</small>
+					<div class="clearF"></div>
+				</li>
 
-  <p><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></p>
+				<li class="nest_item">
+				 	<span class="item">
+						<%= f.label :password_confirmation %>
+						<%= f.password_field :password_confirmation, :class => :text %>
+					</span>
+					<small>Conferma la tua nuova password</small>
+					<div class="clearF"></div>
+				</li>
 
-  <p><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit "Change my password" %></p>
+				<div class="su-form-button">
+					<%= f.submit "Aggiorna password" %>
+				</div>
+			</ol>
+		</div>
+	</div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

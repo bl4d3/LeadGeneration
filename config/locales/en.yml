@@ -15,14 +15,17 @@ en:
     created_at: Creato il
     all: Tutti
 
-  errors:
-    messages:
-      email_format: "non valido"
-      blank: "non deve essere vuoto"
-      invalid: "accetta normativa privacy"
-      taken: "già presente"
   activerecord:
+    errors:
+      messages:
+        email_format: "non valido"
+        blank: "non deve essere vuoto"
+        invalid: "accetta normativa privacy"
+        taken: "già presente"
     attributes:
+      contact:
+        name: "Nome"
+        lastname: "Cognome"
       estimate:
         name: "Nome"
         lastname: "Cognome"

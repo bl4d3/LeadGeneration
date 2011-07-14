@@ -7,7 +7,7 @@ PP_COMPANIES = 5
 SEND_MAIL = true
 SEND_REPORT_ADMIN = true
 ESTIMATE_FOR_COMPANY = 3
-MAIL_FROM = "info@nerdydog.it"
+MAIL_FROM = "info@matrimonioidee.it"
 MAIL_TO = "mattia.lipreri@gmail.com"
 
 # Initialize the rails application

@@ -14,7 +14,7 @@
 					<%= f.text_field :name, :class => :text %>
                     
                 </span>
-                <small>Nome o ragione sociale della tua azienda</small>
+                <small>Inserisci il tuo nome</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -25,7 +25,7 @@
 					<%= f.text_field :lastname, :class => :text %>
                     
                 </span>
-                <small>P.IVA della tua azienda</small>
+                <small>Inserisci il tuo cognome</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -36,7 +36,7 @@
 					<%= f.text_field :address, :class => :text %>
                     
                 </span>
-                <small>P.IVA della tua azienda</small>
+                <small>Inserisci il tuo indirizzo (es: via Roma 10)</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -48,7 +48,7 @@
 					<%= f.hidden_field :city_id %>
                     
                 </span>
-                <small>Digita la citt&agrave; dove risiede la tua azienda</small>
+                <small>Digita la tua citt&agrave; di residenza, campo a completamento automatico</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -59,7 +59,7 @@
 					<%= f.text_field :email, :class => :text %>
                     
                 </span>
-                <small>P.IVA della tua azienda</small>
+                <small>Inserisci un indirizzo e-mail valido</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -70,7 +70,7 @@
 					<%= f.text_field :phone, :class => :text %>
                     
                 </span>
-                <small>P.IVA della tua azienda</small>
+                <small>Inserisci un tuo recapito telefonico</small>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>
             </li>
@@ -81,7 +81,7 @@
 					<%= f.text_area :note, :class => :text %>
                     
                 </span>
-                <small>Informazioni sul tuo matrimonio</small>
+                <small>Informazioni utili sul tuo matrimonio</small>
                 <div class="clearF"></div>
             </li>
 
@@ -106,13 +106,13 @@
 					<% end %>
 					</div>
                 </span>
-                <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
+                <small>Seleziona le varie categorie per le quali vuoi ricevere preventivi, verr&agrave; inviata una e-mail alle aziende che corrispondono ai tuoi criteri.</small>
                 <div class="clearF"></div>
             </li>
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :privacy %>
-					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:name => "Privacy").first) %>
+					<%= f.check_box :privacy %> Accetto le normative sulla <%= link_to "privacy", frontend_path(Container.where(:place_holder => "privacy").first) %>
                 </span>
 				<div class="mandatory">Obbligatorio</div>
                 <div class="clearF"></div>

@@ -12,29 +12,32 @@
 			</div>			
 			<p><%= truncate(company.description , :length => 150, :omission => "... #{link_to "maggiori info", frontend_company_company_path(company)}").html_safe %><p>
 			<div class="social">
-				<% unless company.url_site.blank? %>
-					<%= link_to image_tag("icon_set/24x24/site.png"), company.url_site %>
+				<% unless company.url_site.blank? %>				  
+					<% company.url_site.include?("http") ? url_company=company.url_site : url_company="http://#{company.url_site}" %>			  
+  				<%= link_to image_tag("icon_set/24x24/site.png"), url_company, :target => "_blank", :rel => "dofollow", :title => company.name %>
 				<% end %>
 				
 				<% unless company.email_address.blank? %>
-					<%= link_to image_tag("icon_set/24x24/E_Mail.png"), "#" %>
+				  <%= mail_to company.email_address,  image_tag("icon_set/24x24/E_Mail.png"), :encode => "hex" %>
 				<% end %>
 				
 				<% unless company.phone.blank? %>
 					<%= image_tag("icon_set/24x24/Phone.png") %> <%= company.phone %>
-					
 				<% end %>
 				
 				<% unless company.facebook.blank? %>
-					<%= link_to image_tag("icon_set/24x24/facebook.png"), company.facebook %>
+				  <% company.facebook.include?("http") ? facebook=company.facebook : facebook="http://#{company.facebook.url_site}" %>	  
+					<%= link_to image_tag("icon_set/24x24/facebook.png"), facebook %>
 				<% end %>
 				
 				<% unless company.twitter.blank? %>
-					<%= link_to image_tag("icon_set/24x24/Twitter.png"), company.twitter %>
+			    <% company.twitter.include?("http") ? twitter=company.twitter : twitter="http://#{company.twitter.url_site}" %>	  
+					<%= link_to image_tag("icon_set/24x24/Twitter.png"), twitter %>
 				<% end %>
 				
 				<% unless company.youtube.blank? %>
-					<%= link_to image_tag("icon_set/24x24/utube.png"), company.youtube %>
+				  <% company.youtube.include?("http") ? youtube=company.youtube : youtube="http://#{company.youtube.url_site}" %>	  
+					<%= link_to image_tag("icon_set/24x24/utube.png"), youtube %>
 				<% end %>
 			</div>
 		</div>
