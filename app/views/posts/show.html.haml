@@ -52,7 +52,8 @@
           %b
             = t("activerecord.attributes.post.user_id", :default => t("activerecord.labels.user_id", :default => "User"))
             \:
-          = @post.user_id
+          = @post.user.displayName
+          = mail_to @post.user.email
         %p
           %b
             = t("activerecord.attributes.post.is_public", :default => t("activerecord.labels.is_public", :default => "Is public"))

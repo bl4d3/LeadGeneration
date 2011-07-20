@@ -80,8 +80,17 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
 
+    was_enabled = @company.is_enabled
+    logger.info "\n--> was_enabled #{was_enabled}\n"
+    
     respond_to do |format|
       if @company.update_attributes(params[:company])
+        if !was_enabled
+          if @company.is_enabled
+            args = [@company.email_address,MAIL_FROM,"Abilitazione azienda su MatrimonioIdee.it","#{@company.id}"]
+            QueuedEmails.add("Notification","company_enabled", args, 0)
+          end
+        end
         format.html { redirect_to(@company, :notice => 'Company was successfully updated.') }
         format.xml  { head :ok }
       else

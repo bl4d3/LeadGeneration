@@ -42,12 +42,14 @@
           %tr
             %th Nome
             %th Preventivi
+            %th Abilitata
             %th= t("web-app-theme.created_at", :default => "Created at")
             %th.last &nbsp;
           - @companies.each do |company|
             %tr{:class => cycle("odd", "even")}
               %td= company.name
               %td= company.estimates.size
+              %td= company.is_enabled? ? "Si" : "No"
               %td
                 = f_date(company.created_at)
               %td.last{:style=>"width:260px"}

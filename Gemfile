@@ -23,3 +23,9 @@ gem 'devise_rpx_connectable'
 gem 'acts_as_commentable'
 gem 'meta_search'
 gem 'meta_where'
+gem 'geocoder'
+gem 'gmaps4rails', '= 0.8.7'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.6"
+end

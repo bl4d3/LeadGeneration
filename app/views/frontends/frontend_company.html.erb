@@ -23,17 +23,17 @@
 			<% end %>
 			
 			<% unless @company.facebook.blank? %>
-			  <% @company.facebook.include?("http") ? facebook=@company.facebook : facebook="http://#{@company.facebook.url_site}" %>	  
+			  <% @company.facebook.include?("http") ? facebook=@company.facebook : facebook="http://#{@company.facebook}" %>	  
 				<%= link_to image_tag("icon_set/24x24/facebook.png"), facebook %>
 			<% end %>
 			
 			<% unless @company.twitter.blank? %>
-		    <% @company.twitter.include?("http") ? twitter=@company.twitter : twitter="http://#{@company.twitter.url_site}" %>	  
+		    <% @company.twitter.include?("http") ? twitter=@company.twitter : twitter="http://#{@company.twitter}" %>	  
 				<%= link_to image_tag("icon_set/24x24/Twitter.png"), twitter %>
 			<% end %>
 			
 			<% unless @company.youtube.blank? %>
-			  <% @company.youtube.include?("http") ? youtube=@company.youtube : youtube="http://#{@company.youtube.url_site}" %>	
+			  <% @company.youtube.include?("http") ? youtube=@company.youtube : youtube="http://#{@company.youtube}" %>	
 				<%= link_to image_tag("icon_set/24x24/utube.png"), youtube %>
 			<% end %>
 		</div>

@@ -7,6 +7,12 @@
 			
 			<div class="info">
 				<%= difference_date(post.created_at,"m") %> in <%= link_to post.argument.name, blog_argument_frontend_path(post.argument) %>
+				da 
+				<% if post.user.role?(:company)  %>
+				  <%= link_to post.user.companies.first.name,  frontend_company_company_path(post.user.companies.first) %>
+				<% else %>
+				  <%= post.user.displayName %>
+				<% end %>
 			</div>
 			
 			<div class="impression">

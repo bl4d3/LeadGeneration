@@ -37,7 +37,7 @@
 .group
   = f.label :url_site, t("activerecord.attributes.company.url_site", :default => "Url site"), :class => :label
   = f.text_field :url_site, :class => 'text_field'
-  %span.description Eventuale sito internet aziendale
+  %span.description Eventuale sito internet aziendale es: http://ilmiosito.com
 .group
   = f.label :email_address, t("activerecord.attributes.company.email_address", :default => "Email address"), :class => :label
   = f.text_field :email_address, :class => 'text_field'
@@ -57,15 +57,15 @@
 .group
   = f.label :facebook, t("activerecord.attributes.company.facebook", :default => "Facebook"), :class => :label
   = f.text_field :facebook, :class => 'text_field'
-  %span.description Indirizzo internet della propria pagina di Facebook
+  %span.description Indirizzo internet della propria pagina di Facebook es: http://facebook.com/miapagina
 .group
   = f.label :twitter, t("activerecord.attributes.company.twitter", :default => "Twitter"), :class => :label
   = f.text_field :twitter, :class => 'text_field'
-  %span.description Indirizzo internet del proprio account di Twitter
+  %span.description Indirizzo internet del proprio account di Twitter es: http://twitter.com/nomeutente
 .group
   = f.label :youtube, t("activerecord.attributes.company.youtube", :default => "Youtube"), :class => :label
   = f.text_field :youtube, :class => 'text_field'
-  %span.description Indirizzo del canale di Youtube
+  %span.description Indirizzo del canale di Youtube es: http://youtube.com/user/mioutente
 - if current_user.role?(:admin)
   .group
     = f.label :tokens, t("activerecord.attributes.company.tokens", :default => "Tokens"), :class => :label
@@ -80,18 +80,19 @@
     = f.check_box :is_enabled, :class => 'check_box'
     %span.description Ex: a simple text
 .group
-  = hidden_field_tag "company[user_id]", current_user.id
+  - if @company.user_id.blank?
+    = hidden_field_tag "company[user_id]", current_user.id
 .group
   = f.label :privacy, t("activerecord.attributes.company.privacy", :default => "Privacy"), :class => :label
   = f.check_box :privacy
   %span.description Accetto le normative sulla #{link_to "privacy", frontend_path(Container.where(:place_holder => "privacy").first), :target => "_blank"}
  
 .group
-  = f.label :department_id, t("activerecord.attributes.company.department_id", :default => "Zone di competenza"), :class => :label
+  = f.label :department_ids, t("activerecord.attributes.company.department_id", :default => "Zone di competenza"), :class => :label
   = f.text_field :department_tokens, "data-pre" => @company.departments.map(&:attributes).to_json
   %span.description Digita le varie provincie di competenza nella quale opera l'azienda, questo serve per ricevere le richieste di preventivo da parte dei clienti che risiedono vicino a te 
 .group
-  =  label_tag :category_id, t("activerecord.attributes.company.category_id", :default => "Category"), :class => :label
+  =  f.label :category_ids, t("activerecord.attributes.company.category_id", :default => "Category"), :class => :label
   %span.description Seleziona una o pi&ugrave; categorie in base alle attivit&agrave; svolte dall'azienda
   - for category in Category.all
     .div

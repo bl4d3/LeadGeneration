@@ -2,6 +2,24 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  #company
+  name: "Ragione sociale"
+  piva: "P. IVA"
+  description: "Descrizione"
+  address: "Indirizzo"
+  city_id: "Citta'"
+  email_address: "E-mail"
+  phone: "Telefono"
+  department: "Provincie"
+  category: "Categorie"
+  privacy: "Privacy"
+  url_site: "Sito internet"
+  category_id: "Categorie"
+  department_id: "Provincia"
+  timetable: "Orari di apertura"
+  category_ids: "Categorie"
+  department_ids: "Zone di competenza"
+  
   web-app-theme: 
     save: Salva
     cancel: Cancella
@@ -50,6 +68,8 @@ en:
         category_id: "Categorie"
         department_id: "Provincia"
         timetable: "Orari di apertura"
+        category_ids: "Categorie"
+        department_ids: "Zone di competenza"
       question:
         title: "La tua domanda"
         email: "E-mail"

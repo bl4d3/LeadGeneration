@@ -55,6 +55,8 @@ LeadGeneration::Application.routes.draw do
     # frontend for company
     get :new_company, :on => :collection
     post :create_company, :on => :collection
+    get :aggregator_show, :on => :collection
+    get :search_on_map, :on => :collection
     # frontend for estimate
     get :new_estimate, :on => :collection
     post :create_estimate, :on => :collection    
@@ -86,11 +88,11 @@ LeadGeneration::Application.routes.draw do
   
   # TODO naming routes...
   match 'nuova-azienda-matrimonio' => "frontends#new_company", :as => :new_company_frontends
-  match 'richiedi-preventivo-per-matrimonio' => "frontends#new_estimate", :as => :new_estimate_frontends
+  match 'richiedi-preventivi-per-matrimonio' => "frontends#new_estimate", :as => :new_estimate_frontends
   match 'articoli-blog' => "frontends#blog", :as => :blog_frontends
   match 'dettaglio-articolo' => "frontends#blog_argument", :as => :blog_argument_frontends
   
-  match 'matrimonio-idee/(:id)' => "frontends#show", :as => :frontend
+  match 'organizzare-matrimonio/(:id)' => "frontends#show", :as => :frontend
   
   match 'categorie-preventivi-matrimonio/(:id)' => "frontends#category_frontend", :as => :category_frontend_category_companies
   match 'azienda-settore-matrimonio/(:id)' => "frontends#frontend_company", :as => :frontend_company_company
@@ -147,8 +149,6 @@ LeadGeneration::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => "frontends#index"
-
-  # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

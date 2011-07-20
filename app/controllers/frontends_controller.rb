@@ -30,14 +30,13 @@ class FrontendsController < ApplicationController
     end
     
     if @container.place_holder == "search_companies"
-      #@companies = Company.where(:is_enabled => 1).order("created_at DESC").page(params[:page]).per(PP_COMPANIES)
-
       @search = Company.search(params[:search])
       @search.meta_sort ||= 'created_at.desc'
-      #@companies = Kaminari.paginate_array(@search.where(:is_enabled => 1)).page(params[:page]).per(PP_COMPANIES)
       @companies = Kaminari.paginate_array(@search.all).page(params[:page]).per(PP_COMPANIES)
-
-
+    end
+    
+    if @container.place_holder == "companies_map"
+      @companies = Company.find(:all)
     end
     
     # show all question
@@ -203,7 +202,7 @@ class FrontendsController < ApplicationController
   # show all the companies associated at the category
   def category_frontend
     @category = Category.find(params[:id])
-    @companies = @category.companies.order(:name).page(params[:page]).per(10)
+    @companies = @category.companies.where(:is_enabled => 1).order(:name).page(params[:page]).per(10)
     @contact = Contact.new
     logger.info "\n --> #{@category.companies.size}\n"
     # TODO select the right container
@@ -230,6 +229,7 @@ class FrontendsController < ApplicationController
   def blog
     @container = Container.where(:name => "Blog").first
     @posts = Post.where(:is_public => 1).page(params[:page])
+    @posts= @posts.order("created_at DESC")
      
     @contact = Contact.new
     render :template => "frontends/blog", :layout => "layouts/frontends/blog"
@@ -268,7 +268,7 @@ class FrontendsController < ApplicationController
     @posts = Post.where(:is_public => 1)
     @categories = Category.all
     @companies = Company.where(:is_enabled => 1)
-    @questions = Question.where(:is_enabled => 1)
+    @questions = Question.all
   end
   
   def blogfeed
@@ -289,6 +289,31 @@ class FrontendsController < ApplicationController
   def send_mail
     QueuedEmails.send_email
     render :inline => ""
+  end
+  
+  def aggregator_show
+    @company = Company.find(params[:id])
+  end
+  
+  
+  def search_on_map
+    if !params[:companies].blank? && !params[:companies][:category_ids].blank?
+      @companies = Company.includes(:categories).where(:is_enabled => 1, :categories => {:id=>params[:companies][:category_ids]}).near(params[:company][:city_name],70)
+    else
+      @companies = Company.where(:is_enabled => 1).near(params[:company][:city_name],70)
+    end
+    
+	  render :update do |page|
+	    if !@companies.blank?
+  		  page << " Gmaps4Rails.replace_markers(#{@companies.to_gmaps4rails}); "
+  		  page << "$('#company_detail').html('')"
+  		  page << "$('#error_search').html('')"
+  		  page << "$('html,body').animate({scrollTop: $('#maps_aggregator_anchor').offset().top},'slow');"
+  			
+		  else
+		    page << "$('#error_search').html('<h2>Oops! Nessuna azienda trovata in questa citt&agrave;</h2>')"
+	    end
+  	end
   end
   
 end

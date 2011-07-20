@@ -31,6 +31,14 @@ $(document).ready(function() {
 	$( "#search_created_at_gte" ).datepicker();
 	$( "#search_created_at_lte" ).datepicker();
 	
+	if ($('#company_department_tokens').length > 0){
+		$('#company_department_tokens').blur();
+		$('html, body').animate({scrollTop:0});
+	}
+	
+	$("#checkboxes_category input[type=checkbox]").attr('checked', true);
+  
+	
 });
 
 function init_show_deliver(){
@@ -56,3 +64,37 @@ function hideEl(id){
 	    $('#'+id).fadeOut('fast');
 	}, 2000); // <-- time in milliseconds
 }
+
+function bangme(id){
+	$('#what_is_happen').html('...caricamento');
+	$('#what_is_happen').show();
+	$.ajax({
+		url: '/frontends/aggregator_show/?id='+id, 
+		type: 'get', 
+		dataType: 'script',
+		success: function(data) {
+			$('html,body').animate({scrollTop: $("#company_anchor").offset().top},'slow');
+			$('#what_is_happen').hide();
+		 	}
+	});
+}
+
+
+function toggle(div)
+{
+	$("#"+div).toggle("slow");
+	return false;
+}
+
+$("#select_all_category").live('click', function () {
+    if ($('#select_all_category:checked').length)
+    {
+        $("#checkboxes_category input[type=checkbox]").attr('checked', true);
+        $("#categories_status").html("Deseleziona tutti")
+    }
+    else
+    {
+        $("#checkboxes_category input[type=checkbox]").attr('checked', false);
+        $("#categories_status").html("Seleziona tutti")        
+    }
+});

@@ -44,9 +44,11 @@ GEM
     devise_rpx_connectable (0.2.2)
       devise (>= 1.1.2)
       rpx_now (>= 0.6.23)
+    diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     fastercsv (1.5.4)
+    geocoder (1.0.2)
     geokit (1.5.0)
     geokit-rails3 (0.1.3)
       geokit (~> 1.5.0)
@@ -105,6 +107,19 @@ GEM
     rake (0.8.7)
     rpx_now (0.6.24)
       json_pure
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.4)
+    rspec-expectations (2.6.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.6.0)
+    rspec-rails (2.6.1)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+      rspec (~> 2.6.0)
     ruby_parser (2.0.6)
       sexp_processor (~> 3.0)
     sexp_processor (3.0.5)
@@ -129,6 +144,7 @@ DEPENDENCIES
   devise
   devise_rpx_connectable
   fastercsv
+  geocoder
   geokit-rails3
   gmaps4rails (= 0.8.7)
   haml
@@ -141,5 +157,6 @@ DEPENDENCIES
   mysql2 (= 0.2.6)
   rails (= 3.0.7)
   rails3-jquery-autocomplete
+  rspec-rails (~> 2.6)
   ruby_parser
   web-app-theme (>= 0.6.2)

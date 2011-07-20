@@ -67,7 +67,7 @@
 						<div class="avatar">
 							<%= image_tag comment.user.photo.gsub("large", "square") unless comment.user.photo.blank? %>
 						</div>
-						<% if @question.user.role?(:guest) %>
+						<% if comment.user.role?(:guest) %>
 						<div class="user_detail">
 							<% if comment.user.url.blank? %>
 								<%= comment.user.displayName unless comment.user.displayName.blank? %>
@@ -80,10 +80,10 @@
 						</div>
 						<% else %>
 						<div class="is_company" style="margin-left:0px">
-							<%= @question.user.companies.size>1 ? "Aziende" : "Azienda" %>
+							<%= comment.user.companies.size>1 ? "Aziende" : "Azienda" %>
 						</div>
 						<ul>
-						<% @question.user.companies.each do |company| %>
+						<% comment.user.companies.each do |company| %>
 							<li><%= link_to truncate(company.name,:length=>60),  frontend_company_company_path(company), :target => "_blank" %></li>
 						<% end %>
 						</ul>

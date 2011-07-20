@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'faster_csv'
+require 'open-uri'
+require 'net/http'
 
 namespace :leadgeneration do
 	task :import_departments => :environment do
@@ -32,4 +34,29 @@ namespace :leadgeneration do
 		}
 		
 	end
+	
+	task :geocode => :environment do
+	  Company.find(:all).each do |c|
+	    if c.latitude.blank? and c.longitude.blank?
+        geo=c.geocode
+        unless geo.blank?
+          c.update_attribute(:latitude, geo[0])
+          c.update_attribute(:longitude, geo[1])
+        end
+      end
+    end
+  end
+  
+  task :checkxml => :environment do
+    uri_error = []
+    doc = Hpricot(open("http://localhost:3000/sitemap.xml"))
+    doc.search("loc").each do |loc|
+      puts "#{loc.inner_text}"
+      uri_error << loc.inner_text if Net::HTTP.get_response(URI.parse(loc.inner_text)).blank?
+    end
+    puts "\n broken url #{uri_error.size}\n"
+    uri_error.each do |broken|
+      puts "\n broken url: #{broken} \n"
+    end
+  end
 end

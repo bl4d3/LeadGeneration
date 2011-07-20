@@ -9,8 +9,7 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :name %>
-					<%= f.text_field :name, :class => :text %>
-                    
+					          <%= f.text_field :name, :class => :text %>
                 </span>
                 <small>Nome o ragione sociale della tua azienda</small>
 				<div class="mandatory">Obbligatorio</div>
@@ -20,8 +19,7 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :piva %>
-					<%= f.text_field :piva, :class => :text %>
-                    
+					          <%= f.text_field :piva, :class => :text %>
                 </span>
                 <small>P.IVA della tua azienda</small>
                 <div class="clearF"></div>
@@ -30,8 +28,7 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :description %>
-					<%= f.text_area :description, :class=>:text %>
-                    
+					          <%= f.text_area :description, :class=>:text %>
                 </span>
                 <small>Breve descrizione del tuo core business e dei punti di forza della tua azienda</small>
                 <div class="clearF"></div>
@@ -47,8 +44,7 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :address %>
-					<%= f.text_field :address, :class => :text %>
-                    
+					          <%= f.text_field :address, :class => :text %>
                 </span>
                 <small>Indirizzo della tua azienda</small>
 				<div class="mandatory">Obbligatorio</div>
@@ -58,9 +54,8 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :city_id %>
-					<%= f.autocomplete_field :city_name, autocomplete_city_name_companies_path, :class => :text, :id_element => "#company_city_id" %>
-					<%= f.hidden_field :city_id %>
-                    
+				          	<%= f.autocomplete_field :city_name, autocomplete_city_name_companies_path, :class => :text, :id_element => "#company_city_id" %>
+          					<%= f.hidden_field :city_id %>
                 </span>
                 <small>Digita la citt&agrave; dove risiede la tua azienda</small>
 				<div class="mandatory">Obbligatorio</div>
@@ -71,19 +66,16 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :url_site %>
-                    <span class="input_prefix">http://</span>
-					<%= f.text_field :url_site, :class => "text input_website" %>
-                    
+					          <%= f.text_field :url_site, :class => "text" %>
                 </span>
-                <small>Indirizzo internet della tua azienda</small>
+                <small>Indirizzo internet della tua azienda es: http://www.miosito.it</small>
                 <div class="clearF"></div>
             </li>
 
      		<li class="nest_item">
                 <span class="item">
                     <%= f.label :email_address %>
-					<%= f.text_field :email_address, :class => :text %>
-                    
+					          <%= f.text_field :email_address, :class => :text %>
                 </span>
                 <small>Indirizzo e-mail della tua azienda</small>
 <div class="mandatory">Obbligatorio</div>
@@ -93,8 +85,7 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :phone %>
-					<%= f.text_field :phone, :class => :text %>
-                    
+					          <%= f.text_field :phone, :class => :text %>
                 </span>
                 <small>Contatto telefonico della tua azienda</small>
                 <div class="clearF"></div>
@@ -110,30 +101,27 @@
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :facebook %>
-					<%= f.text_field :facebook, :class => :text %>
-                    
+					          <%= f.text_field :facebook, :class => :text %>
                 </span>
-                <small>Pagina facebook della tua azienda</small>
+                <small>Pagina facebook della tua azienda es: http://facebook.com/miapagina</small>
                 <div class="clearF"></div>
             </li>
 
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :twitter %>
-					<%= f.text_field :twitter, :class => :text %>
-                    
+					          <%= f.text_field :twitter, :class => :text %>
                 </span>
-                <small>Account twitter della tua azienda</small>
+                <small>Account twitter della tua azienda es: http://twitter.com/nomeutente</small>
                 <div class="clearF"></div>
             </li>
 
 			<li class="nest_item">
                 <span class="item">
                     <%= f.label :youtube %>
-					<%= f.text_field :youtube, :class => :text %>
-                    
+					          <%= f.text_field :youtube, :class => :text %>
                 </span>
-                <small>Canale youtube della tua azienda</small>
+                <small>Canale youtube della tua azienda es: http://youtube.com/user/mioutente</small>
                 <div class="clearF"></div>
             </li>
 		</ol>
@@ -146,15 +134,15 @@
 		<ol>
 			<li class="nest_item">
                 <span class="item">
-                    <%= f.label :department %>
-					<%= f.text_field :department_tokens, :class => :text,"data-pre" => @company.departments.map(&:attributes).to_json %>
+                    <%= f.label :department_ids %>
+					          <%= f.text_field :department_tokens, :class => :text,"data-pre" => @company.departments.map(&:attributes).to_json %>
                 </span>
                 <small>Digita le provincie nelle la tua azienda opera, puoi inserire pi&ugrave; di una provincia</small>
                 <div class="clearF"></div>
             </li>
 			<li class="nest_item">
                 <span class="item">
-                    <%= f.label :category %>
+                    <%= f.label :category_ids %>
 					<div class="select_categories">
 					<% for category in Category.all %>
 				    <div>

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied."
     redirect_to root_url
   end
-  
+
   def after_sign_in_path_for(resource)
       if !current_user.role?(:guest)
         stored_location_for(resource) || companies_path

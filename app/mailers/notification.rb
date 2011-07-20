@@ -2,7 +2,7 @@ class Notification < ActionMailer::Base
   add_template_helper(EstimatesHelper)
   add_template_helper(CompaniesHelper)
   
-  default :from => "info@nerdydog.it"
+  default :from => "info@matrimonioidee.it"
   
   def welcome_email
     @user = "user"
@@ -55,6 +55,11 @@ class Notification < ActionMailer::Base
   
   def reply_to_question(to, from, subject, id)
     @question = Question.find(id)
+    mail(:from => from, :to => to, :subject => subject)
+  end
+  
+  def company_enabled(to, from, subject, id)
+    @company = Company.find(id)
     mail(:from => from, :to => to, :subject => subject)
   end
     
