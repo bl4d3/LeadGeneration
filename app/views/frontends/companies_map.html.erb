@@ -1,0 +1,84 @@
+
+<%= fix_text(@container.description) %>
+
+	<% form_tag search_on_map_frontends_path, :method => :get, :remote => true do %>
+	
+  <div class="box-form">
+  		<div class="su-form">
+        <ol>
+  			  <li class="nest_item">
+            <span class="item">
+              <%= label_tag "Citt&agrave;".html_safe %>
+        			<%= autocomplete_field_tag "company[city_name]", "", autocomplete_city_name_companies_path, :class => :text, :id_element => "#city_id" %>
+        			<%= hidden_field_tag :city_id %>
+            </span>
+            <small>Inserisci la citt&agrave; nella quale vuoi visualizzare le aziende</small>
+            <div class="clearF"></div>
+          </li>
+        </ol>
+      </div>
+      
+      <div class="box_categories">
+  			<a href="javascript:void(0);" onclick="javascript:toggle('checkboxes_category');"><h3>Ricerca avanzata?</h3></a>
+  			<div id="checkboxes_category" style="display:none;">
+  				<%= check_box_tag "select_all_category"%><span id="categories_status">Deseleziona tutti</span><br />
+  				<table>
+  				<tr>
+  				<% Category.all.in_groups_of(3, false) do |categories| %>
+  					<ul class="box_categories_partial">
+  					<% for category in categories %>
+  						<li><%= check_box_tag "companies[category_ids][]", category.id %><%= category.title %></li>
+  					<% end %>
+  					</ul>
+  				<% end %>
+  				<div class="clearF"></div>
+  				</tr>
+  				</table>
+  			</div>
+  		</div>
+      
+      
+      <div class="su-form-button">
+        <%= submit_tag "Ricerca" %>
+      </div>
+  </div>
+
+
+	<% end %>
+	
+	<div id="error_search" class=""></div>
+
+
+<script type="text/javascript" charset="utf-8">
+	 function gmaps4rails_infobox(boxText) {
+  return {
+     content: boxText
+    ,disableAutoPan: false
+    ,maxWidth: 0
+    ,pixelOffset: new google.maps.Size(-140, 0)
+    ,zIndex: null
+    ,boxStyle: { 
+      background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
+      ,opacity: 0.9
+      ,width: "280px"
+       }
+    ,closeBoxMargin: "10px 2px 2px 2px"
+    ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+    ,infoBoxClearance: new google.maps.Size(1, 1)
+    ,isHidden: false
+    ,pane: "floatPane"
+    ,enableEventPropagation: false
+ }};
+</script>
+
+<a id="maps_aggregator_anchor" href="#maps_aggregator_anchor"></a>
+
+<div class="maps_aggregator">
+	<%= gmaps(
+		    "map_options" => {"auto_adjust" => true},
+			"markers" => {"data" => @companies.to_gmaps4rails, "options" => {"custom_infowindow_class" => "orange" }}
+			) 
+	%> 
+</div>
+
+<div id="company_detail"></div>

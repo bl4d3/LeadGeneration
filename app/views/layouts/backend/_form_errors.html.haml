@@ -1,0 +1,9 @@
+- if obj.errors.any?
+  %div.errorExplanation
+    %h2= obj.errors.size==1 ? "#{obj.errors.count} errore" : "#{obj.errors.count} errori"
+    %ul
+      - obj.errors.each do |attr,msg|
+        %li
+          %span.item= "#{t(attr)}:"
+          = msg
+       

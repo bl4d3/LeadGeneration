@@ -1,0 +1,44 @@
+<a id="company_anchor" href="#company_anchor"></a>
+<h1><%= @company.name %></h1>
+<div class="companies">
+	<div class="company">
+		<div class="address">
+			<%= "#{@company.address},"  unless @company.address.blank? %>
+			<%= @company.city.name %>,
+			<%= @company.city.department.name %>
+		</div>			
+		<p><%= @company.description.html_safe %><p>
+		<p>Aree di competenza: <%= @company.categories.map(&:title).join(", ") %></p>
+		<p>Provincie di competenza: <%= @company.departments.map(&:name).join(", ") %></p>
+		<div class="social">
+			<% unless @company.url_site.blank? %>
+			  <% @company.url_site.include?("http") ? url_company=@company.url_site : url_company="http://#{@company.url_site}" %>	  
+				<%= link_to image_tag("icon_set/24x24/site.png"), url_company, :target => "_blank", :rel => "dofollow", :title => @company.name %>
+			<% end %>
+			
+			<% unless @company.email_address.blank? %>
+				<%= mail_to @company.email_address,  image_tag("icon_set/24x24/E_Mail.png"), :encode => "hex" %>				
+			<% end %>
+			
+			<% unless @company.phone.blank? %>
+				<%= image_tag("icon_set/24x24/Phone.png") %> <%= @company.phone %>
+				
+			<% end %>
+			
+			<% unless @company.facebook.blank? %>
+			  <% @company.facebook.include?("http") ? facebook=@company.facebook : facebook="http://#{@company.facebook}" %>	  
+				<%= link_to image_tag("icon_set/24x24/facebook.png"), facebook %>
+			<% end %>
+			
+			<% unless @company.twitter.blank? %>
+		    <% @company.twitter.include?("http") ? twitter=@company.twitter : twitter="http://#{@company.twitter}" %>	  
+				<%= link_to image_tag("icon_set/24x24/Twitter.png"), twitter %>
+			<% end %>
+			
+			<% unless @company.youtube.blank? %>
+			  <% @company.youtube.include?("http") ? youtube=@company.youtube : youtube="http://#{@company.youtube}" %>	
+				<%= link_to image_tag("icon_set/24x24/utube.png"), youtube %>
+			<% end %>
+		</div>
+	</div>
+</div>
