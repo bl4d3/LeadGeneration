@@ -6,13 +6,13 @@ ENV['RAILS_ENV'] ||= 'production'
 PP_QUESTIONS = 10
 QUESTIONS_IN_FOOTER = 5
 PP_COMPANIES = 5
-SEND_MAIL = true
-SEND_REPORT_ADMIN = true
-ESTIMATE_FOR_COMPANY = 3
+SEND_MAIL = true # send email to companies
+SEND_REPORT_ADMIN = true # send notidication email to admin
+ESTIMATE_FOR_COMPANY = 3 # max number of estimates sent out for
 MAIL_FROM = "info@matrimonioidee.it"
-MAIL_TO = "mattia.lipreri@gmail.com"
-MAX_CATEGORIES_FOR_COMAPNY = 4
-MAX_DEPARTMENTS_FOR_COMAPNY = 4
+MAIL_TO = "info@nerdydog.it"
+MAX_CATEGORIES_FOR_COMAPNY = 4 # max numeber of categories for company
+MAX_DEPARTMENTS_FOR_COMAPNY = 4 # max number of departments (province) for companies
 # Initialize the rails application
 LeadGeneration::Application.initialize!
 

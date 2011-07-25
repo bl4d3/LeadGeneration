@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20110711071412) do
   end
 
   create_table "positions", :force => true do |t|
-    t.integer  "container_id"
+    t.integer  "continer_id"
     t.integer  "place_id"
     t.datetime "created_at"
     t.datetime "updated_at"

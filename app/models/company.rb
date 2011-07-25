@@ -53,10 +53,10 @@ class Company < ActiveRecord::Base
 	validates :address, :presence => true
 	validates :privacy, :format => /1/
 	validates :email_address, :presence => true, :uniqueness => true, :email_format => true
-	validates :url_site, :uri => { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }, :if => Proc.new{|a| a.url_site.present? }
-	validates :facebook, :uri => { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }, :if => Proc.new{|a| a.facebook.present? }
-	validates :twitter, :uri => { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }, :if => Proc.new{|a| a.twitter.present? }
-	validates :youtube, :uri => { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }, :if => Proc.new{|a| a.youtube.present? }
+	validates :url_site, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, :if => Proc.new{|a| a.url_site.present? }
+	validates :facebook, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, :if => Proc.new{|a| a.facebook.present? }
+	validates :twitter, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, :if => Proc.new{|a| a.twitter.present? }
+	validates :youtube, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, :if => Proc.new{|a| a.youtube.present? }
 	before_validation :check_categories
 	before_validation :check_departments
 	

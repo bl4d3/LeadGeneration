@@ -3,3 +3,4 @@ log/*.log
 tmp/**/*
 .DS_Store
 *.sql
+note.txt

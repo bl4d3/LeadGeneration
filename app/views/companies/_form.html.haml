@@ -53,7 +53,7 @@
 .group
   = f.label :timetable, t("activerecord.attributes.company.timetable", :default => "Timetable"), :class => :label
   = f.text_field :timetable, :class => 'text_field'
-  %span.description Orari di apertura (es: dal luned&grave, al venerd&igrave; dalle 8:00 alle 18:00)
+  %span.description Orari di apertura (es: dal luned&grave;, al venerd&igrave; dalle 8:00 alle 18:00)
 .group
   = f.label :facebook, t("activerecord.attributes.company.facebook", :default => "Facebook"), :class => :label
   = f.text_field :facebook, :class => 'text_field'
@@ -80,7 +80,7 @@
     = f.check_box :is_enabled, :class => 'check_box'
     %span.description Ex: a simple text
 .group
-  - if @company.user_id.blank?
+  - unless current_user.role?(:admin)
     = hidden_field_tag "company[user_id]", current_user.id
 .group
   = f.label :privacy, t("activerecord.attributes.company.privacy", :default => "Privacy"), :class => :label
@@ -90,10 +90,10 @@
 .group
   = f.label :department_ids, t("activerecord.attributes.company.department_id", :default => "Zone di competenza"), :class => :label
   = f.text_field :department_tokens, "data-pre" => @company.departments.map(&:attributes).to_json
-  %span.description Digita le varie provincie di competenza nella quale opera l'azienda, questo serve per ricevere le richieste di preventivo da parte dei clienti che risiedono vicino a te 
+  %span.description Digita le varie provincie di competenza nella quale opera l'azienda, questo serve per ricevere le richieste di preventivo da parte dei clienti che risiedono vicino a te (massimo 4)
 .group
   =  f.label :category_ids, t("activerecord.attributes.company.category_id", :default => "Category"), :class => :label
-  %span.description Seleziona una o pi&ugrave; categorie in base alle attivit&agrave; svolte dall'azienda
+  %span.description Seleziona una o pi&ugrave; categorie in base alle attivit&agrave; svolte dall'azienda  (massimo 4)
   - for category in Category.all
     .div
       = check_box_tag "company[category_ids][]", category.id, @company.categories.include?(category)

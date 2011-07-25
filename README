@@ -1,35 +1,60 @@
-rails g scaffold Company latitude:float longitude:float altitude:float name:string description:text piva:string url_site:string email_address:string phone:string fax:string timetable:string facebook:string twitter:string youtube:string tokens:integer is_exclusive:boolean user_id:integer
+= Lead Generation Platform LGP
+This platform is a tool to generate consumer interest or inquiry into a specified products or services of a business. In this case I'd like to provide a flexible system to startup a web app for retrieve estimate request from users and deliver them automatically to the business company that operate in a specified field. With this we'd like to promote the local business.
 
-rails g scaffold City name:string department_id:integer zip:string
+Each company has those attributes:
+* area of competence: rapresents the geographic area (like country or province) where the company can work
+* categories: rapresents the fields where the company works (like plumber, mason and so on...)
 
-rails g scaffold Department name:string
+== EXAMPLE 
+You can find a version of this app in production mode at http://www.matrimonioidee.it
 
-rails g scaffold Zone city_id:integer department_id:integer company_id:integer
+== Admin user backend functionality
+As admin you can:
+* edit page for the frontend, all the pages are shipped with editable SEO proprieties like meta key, meta description, permalink and so on
+* edit post into for the blog
+* edit question for Q&A system
+* edit business company
+* edit company's categories that rapresent the company skill 
+* manage the estimates send to the companies
+* manage contacts subscribed from newsletter module
 
-rails g scaffold Category title:string description:text parent_id:string
+== Company user backend functionality
+As company you can:
+* edit your companies 
+* choosing categories for the company
+* choosing area of competence for the company 
+* edit post into the blog, at the end of the post will appear you company information
+* visualize the estimates sent to the company
 
-rails g scaffold Services category_id:integer company_id:integer
+== Guest user frontend functionality
+As guest you can:
+* create new questions
+* reply to question
+* comment out the post
+* authentication is handled with http://www.janrain.com/
 
-rails g scaffold Containers name:string description:text parent_id:integer is_public:integer order_show:integer template:string user_id:integer mkey:string mdescription:string mtitle:string slug:string
 
-rails g scaffold Places name:string alias:string
+== Frontend functionality
+* user can send estimate request to X companies by selecting the categories where he's interested
+  * will be selected all the companies with the same area of competence and categories pointed out by the user, data will be stored and an email will be sent at the companies
+* user can show companies on the map and look out the detail
 
-rails g scaffold Positions continer_id:integer place_id:integer
+== Frontend templating
+Right now, there is no template system for it, all the frontend views are located into app/view/frontends and app/view/layouts/frontends and are handled by frontends_controller.rb . You need to modify manually those files.
 
-rails g scaffold Estimates name:string lastname:string address:string city_id:integer email:string phone:string
+== SETUP
+change the settings into database.yml, named routes into routes.rb and run
+ 
+  bundle install
+  rake db:migrate
+  rake leadgeneration:import_departments
+  rake leadgeneration:import_cities
+  rake leadgeneration:create_admin
+  rails s
+  
+open your browser at http://127.0.0.1:3000/users/sign_in
 
-rails g scaffold Needs category_id:integer estimate_id:integer
-
-rails g scaffold Arguments name:string alias:string slug:string
-
-rails g scaffold Posts title:string intro:text body:text mkey:text mdescription:text slug:string argument_id:integer user_id:integer is_public:boolean is_commentable:boolean
-
-rails g scaffold Contacts name:string lastname:string email:string
-
-rails g scaffold Questions title:string body:text email:string category_id:integer
-
-rails g  scaffold Deliver company_id:integer estimate_id:integer is_delivered:boolean feedback:text
-
----------
-rails g web_app_theme:theme companies --theme="drastic-dark" --engine=haml --app-name="Lead Generation"
-rails g web_app_theme:themed companies --engine=haml --theme="drastic-dark"
+== TODO
+* write more test
+* create a default frontend template 
+* add english translation for backend, just in italian right now

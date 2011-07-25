@@ -92,21 +92,7 @@ class FrontendsController < ApplicationController
           end
           
           if SEND_REPORT_ADMIN
-            @companies = []
-            @estimate.categories.each do |category|
-              Company.calculate(ESTIMATE_FOR_COMPANY, category, @estimate.city.department).each do |company|
-                 
-                unless @companies.include?(company)
-                    @companies << company
-                    # update the rank
-                    company.update_attribute(:rank, company.rank+1)
-                    # keep trace of delivered emails...
-                    Deliver.create(:estimate_id => @estimate.id, :company_id => company.id, :is_delivered => false)
-                    
-                end
-              end
-            end
-          
+            @companies = @estimate.calculate_categories
             unless @companies.blank?
               
               if SEND_MAIL
@@ -314,6 +300,19 @@ class FrontendsController < ApplicationController
 		    page << "$('#error_search').html('<h2>Oops! Nessuna azienda trovata in questa citt&agrave;</h2>')"
 	    end
   	end
+  end
+  
+  def public_geocode
+    Company.find(:all).each do |c|
+	    if c.latitude.blank? and c.longitude.blank?
+        geo=c.geocode
+        unless geo.blank?
+          c.update_attribute(:latitude, geo[0])
+          c.update_attribute(:longitude, geo[1])
+        end
+      end
+    end
+    render :inline => ""
   end
   
 end

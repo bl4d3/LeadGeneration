@@ -34,6 +34,10 @@ namespace :leadgeneration do
 		}
 		
 	end
+
+  task :create_admin => :environment do
+  		User.create(:email => "info@example.com", :password => "example.com", :password_confirmation => "example.com", :role => "admin")
+  end
 	
 	task :geocode => :environment do
 	  Company.find(:all).each do |c|

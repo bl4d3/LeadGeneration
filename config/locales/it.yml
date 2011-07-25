@@ -1,0 +1,105 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  #company
+  name: "Ragione sociale"
+  piva: "P. IVA"
+  description: "Descrizione"
+  address: "Indirizzo"
+  city_id: "Citta'"
+  email_address: "E-mail"
+  phone: "Telefono"
+  department: "Provincie"
+  category: "Categorie"
+  privacy: "Privacy"
+  url_site: "Sito internet"
+  category_id: "Categorie"
+  department_id: "Provincia"
+  timetable: "Orari di apertura"
+  category_ids: "Categorie"
+  department_ids: "Zone di competenza"
+  
+  web-app-theme: 
+    save: Salva
+    cancel: Cancella
+    list: Visualizza
+    edit: Modifica
+    new: Nuovo
+    show: Visualizza
+    show_site: Visualizza nel sito
+    delete: Cancella
+    confirm: Sei sicruo?
+    created_at: Creato il
+    all: Tutti
+
+  activerecord:
+    errors:
+      messages:
+        email_format: "non valido"
+        blank: "non deve essere vuoto"
+        invalid: "accetta normativa privacy"
+        taken: "già presente"
+    attributes:
+      contact:
+        name: "Nome"
+        lastname: "Cognome"
+      estimate:
+        name: "Nome"
+        lastname: "Cognome"
+        address: "Indirizzo"
+        city_id: "Citta'"
+        email: "E-mail"
+        note: "Informazioni"
+        category: "Categorie richieste"
+        privacy: "Privacy"
+      company:
+        name: "Ragione sociale"
+        piva: "P. IVA"
+        description: "Descrizione"
+        address: "Indirizzo"
+        city_id: "Citta'"
+        email_address: "E-mail"
+        phone: "Telefono"
+        department: "Provincie"
+        category: "Categorie"
+        privacy: "Privacy"
+        url_site: "Sito internet"
+        category_id: "Categorie"
+        department_id: "Provincia"
+        timetable: "Orari di apertura"
+        category_ids: "Categorie"
+        department_ids: "Zone di competenza"
+      question:
+        title: "La tua domanda"
+        email: "E-mail"
+        body: "Maggiori informazioni"
+        category_id: "Categoria"
+        department_id: "Zone di competenza"
+      comment:
+        comment: "Inserisci la tua opinione"
+      user:
+        remember_me: "Ricordami"
+        displayName: "Nome utente"
+        password_confirmation: "Conferma password"
+        current_password: "Password attuale"
+  views:
+    pagination:
+      previous: "&lt; Precedente"
+      next: "Prossima &gt;"
+      truncate: "..."
+      first: "Prima"
+      last: "Ultima"
+      
+  devise:  
+    failure:  
+      unauthenticated: 'You need to sign in or sign up before continuing.'  
+      unconfirmed: 'You have to confirm your account before continuing.'  
+      locked: 'Your account is locked.'  
+      invalid: 'OH NOES! ERROR IN TEH EMAIL!'  
+      invalid_token: 'Invalid authentication token.'  
+      timeout: 'Your session expired, please sign in again to continue.'  
+      inactive: 'Your account was not activated yet.'  
+    sessions:  
+      signed_in: 'Signed in successfully.'  
+      signed_out: 'Signed out successfully.'

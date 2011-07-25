@@ -28,4 +28,8 @@ gem 'gmaps4rails', '= 0.8.7'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+  gem "shoulda"
 end

@@ -7,7 +7,7 @@
 <p><strong>Diventa partner di Matrimonio Idee per ricevere preventivi da possibili clienti.</strong></p>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
+  <%= render :partial => "layouts/frontends/shared/form_errors", :locals => {:obj => @user} %>
 
 	<div class="box-form">
 		<div class="su-form">

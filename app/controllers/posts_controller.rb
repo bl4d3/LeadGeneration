@@ -53,7 +53,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        Notification.deliver_notify(3) if SEND_MAIL && current_user.role?(:company)
+        if SEND_MAIL && current_user.role?(:company)
+          args = [MAIL_TO,MAIL_FROM,"[ADMIN] Nuovo post","<h1>TITLE</h1>#{@post.title}<h1>BODY</h1>#{@post.body}<h1>USER</h1>#{@post.user.email}"]
+          QueuedEmails.add("Notification","notify_raw", args, 0)
+        end
         
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
         format.xml  { render :xml => @post, :status => :created, :location => @post }
